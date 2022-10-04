@@ -1,0 +1,55 @@
+name: solution_ke
+description: An E-commerce music streaming app.
+
+# Prevent accidental publishing to pub.dev.
+publish_to: "none"
+
+version: 1.0.4+5
+environment:
+  sdk: ">=2.17.0 <3.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  get: ^4.6.5
+  cupertino_icons: ^1.0.5
+  connectivity_plus: ^2.3.6
+  shared_preferences: ^2.0.15
+  cached_network_image: ^3.2.1
+  flutter_svg: ^0.22.0
+  google_sign_in: ^5.0.7
+  flutter_login_facebook: ^1.1.0
+  http: ^0.13.3
+  carousel_slider: ^4.0.0
+  smooth_page_indicator: ^1.0.0+2
+  pin_code_fields: ^7.3.0
+  sms_autofill: ^2.0.0
+  permission_handler: ^10.0.0
+  images_picker: ^1.2.11
+  url_launcher: 6.0.20
+  audio_manager: ^0.8.2
+  # assets_audio_player:
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/images/
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/MontserratSemiBold.ttf
+          weight: 600
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/PoppinsBold.ttf
+          weight: 700
+        - asset: assets/fonts/PoppinsMediumItalic.ttf
+          weight: 500
+        - asset: assets/fonts/PoppinsRegular.ttf
+          weight: 400
+        - asset: assets/fonts/PoppinsMedium.ttf
+          weight: 500
+        - asset: assets/fonts/PoppinsSemiBold.ttf
+          weight: 600

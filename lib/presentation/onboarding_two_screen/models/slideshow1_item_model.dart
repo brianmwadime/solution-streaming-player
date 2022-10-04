@@ -1,0 +1,1 @@
+class Slideshow1ItemModel {}

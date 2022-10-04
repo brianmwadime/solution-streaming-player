@@ -1,0 +1,205 @@
+{
+  "albums": {
+    "data": [
+      {
+        "id": "37296961",
+        "title": "Hkoulha Ala Halti",
+        "image": "https:\/\/c.saavncdn.com\/703\/Hkoulha-Ala-Halti-Arabic-2022-20220812151005-50x50.jpg",
+        "music": "Cheb Abdou Sghir",
+        "url": "https:\/\/www.jiosaavn.com\/album\/hkoulha-ala-halti\/UiNfPp8ku0E_",
+        "type": "album",
+        "description": "2022 \u00b7 Arabic Album \u00b7 Cheb Abdou Sghir",
+        "ctr": 0,
+        "position": 1,
+        "more_info": {
+          "year": "2022",
+          "is_movie": "",
+          "language": "arabic",
+          "song_pids": "Dw7vip-3"
+        }
+      },
+      {
+        "id": "18620295",
+        "title": "Hole Haako Car Mhara Bansa",
+        "image": "https:\/\/c.saavncdn.com\/688\/Hole-Haako-Car-Mhara-Bansa-Hindi-2020-20211025181102-50x50.jpg",
+        "music": "Salim Shekhawas, Shilpa Bidawat",
+        "url": "https:\/\/www.jiosaavn.com\/album\/hole-haako-car-mhara-bansa\/nW4bywVXKTQ_",
+        "type": "album",
+        "description": "2020 \u00b7 Hindi Album \u00b7 Salim Shekhawas, Shilpa Bidawat",
+        "ctr": 0,
+        "position": 2,
+        "more_info": {
+          "year": "2020",
+          "is_movie": "",
+          "language": "hindi",
+          "song_pids": "ksTEiTwT"
+        }
+      },
+      {
+        "id": "1246277",
+        "title": "Modi Haako Jodi",
+        "image": "https:\/\/c.saavncdn.com\/000\/default_Lahari_Music_50x50.jpg",
+        "music": "Various Artists",
+        "url": "https:\/\/www.jiosaavn.com\/album\/modi-haako-jodi\/RR,VKeX,ASs_",
+        "type": "album",
+        "description": "2000 \u00b7 Kannada Album \u00b7 Various Artists",
+        "ctr": 0,
+        "position": 3,
+        "more_info": {
+          "year": "2000",
+          "is_movie": "",
+          "language": "kannada",
+          "song_pids": "wHgxqH5i, Pv-eSDJK, YPSQd3zz, -BNK39Is, eUHoi2rz, -zZ_IQTR, YLXd_zBq, jtivWqBM, 06gTN5gO"
+        }
+      }
+    ],
+    "position": 2
+  },
+  "songs": {
+    "data": [
+      {
+        "id": "Dw7vip-3",
+        "title": "Hkoulha Ala Halti",
+        "image": "https:\/\/c.saavncdn.com\/703\/Hkoulha-Ala-Halti-Arabic-2022-20220812151005-50x50.jpg",
+        "album": "Hkoulha Ala Halti",
+        "url": "https:\/\/www.jiosaavn.com\/song\/hkoulha-ala-halti\/NB9cRx1AGgA",
+        "type": "song",
+        "description": "Hkoulha Ala Halti \u00b7 Cheb Abdou Sghir",
+        "ctr": 0,
+        "position": 1,
+        "more_info": {
+          "primary_artists": "Cheb Abdou Sghir",
+          "singers": "Cheb Abdou Sghir",
+          "video_available": null,
+          "triller_available": false,
+          "language": "arabic"
+        }
+      },
+      {
+        "id": "OfSa7zeB",
+        "title": "Hkole Gulzar Watan Ta",
+        "image": "https:\/\/c.saavncdn.com\/904\/A-Malgaro-Madina-Rata-Yadige-Pashto-2019-20200730173339-50x50.jpg",
+        "album": "A Malgaro Madina Rata Yadige",
+        "url": "https:\/\/www.jiosaavn.com\/song\/hkole-gulzar-watan-ta\/Pw44UENKUnE",
+        "type": "song",
+        "description": "A Malgaro Madina Rata Yadige \u00b7 Muhammad Shafiq Mukhlis",
+        "ctr": 0,
+        "position": 2,
+        "more_info": {
+          "primary_artists": "Muhammad Shafiq Mukhlis",
+          "singers": "Muhammad Shafiq Mukhlis",
+          "video_available": null,
+          "triller_available": false,
+          "language": "pashto"
+        }
+      },
+      {
+        "id": "2tFUzarb",
+        "title": "Hkole Hkole Insanan La",
+        "image": "https:\/\/c.saavncdn.com\/154\/Grane-Mor-Jan-Pa-Yad-K-Pashto-2018-20200730173343-50x50.jpg",
+        "album": "Grane Mor Jan Pa Yad K",
+        "url": "https:\/\/www.jiosaavn.com\/song\/hkole-hkole-insanan-la\/QhwtZA5RRVE",
+        "type": "song",
+        "description": "Grane Mor Jan Pa Yad K \u00b7 Muhammad Shafiq Mukhlis",
+        "ctr": 0,
+        "position": 3,
+        "more_info": {
+          "primary_artists": "Muhammad Shafiq Mukhlis",
+          "singers": "Muhammad Shafiq Mukhlis",
+          "video_available": null,
+          "triller_available": false,
+          "language": "pashto"
+        }
+      }
+    ],
+    "position": 1
+  },
+  "playlists": {
+    "data": [],
+    "position": 3
+  },
+  "artists": {
+    "data": [
+      {
+        "id": "4953902",
+        "title": "HKO",
+        "image": "https:\/\/www.jiosaavn.com\/_i\/3.0\/artist-default-music.png",
+        "extra": "singer",
+        "url": "https:\/\/www.jiosaavn.com\/artist\/hko-\/MjDY-QMPoF4_",
+        "type": "artist",
+        "description": "Singer",
+        "ctr": 0,
+        "entity": 0,
+        "position": 1
+      },
+      {
+        "id": "5056345",
+        "title": "HKontheTrack",
+        "image": "https:\/\/www.jiosaavn.com\/_i\/3.0\/artist-default-film.png",
+        "extra": "producer",
+        "url": "https:\/\/www.jiosaavn.com\/artist\/hkonthetrack-\/k3QtOk49IfM_",
+        "type": "artist",
+        "description": "Producer",
+        "ctr": 0,
+        "entity": 0,
+        "position": 2
+      },
+      {
+        "id": "4702693",
+        "title": "Mr Hko",
+        "image": "https:\/\/www.jiosaavn.com\/_i\/3.0\/artist-default-music.png",
+        "extra": "singer",
+        "url": "https:\/\/www.jiosaavn.com\/artist\/mr-hko-\/6Xivl,T6GwA_",
+        "type": "artist",
+        "description": "Singer",
+        "ctr": 0,
+        "entity": 0,
+        "position": 3
+      }
+    ],
+    "position": 4
+  },
+  "topquery": {
+    "data": [],
+    "position": 0
+  },
+  "shows": {
+    "data": [
+      {
+        "id": "158457",
+        "title": "Kabir Ke Dohe",
+        "image": "https:\/\/c.sop.saavncdn.com\/Kabir-Ke-Dohe-20211106084949-500x500.jpg",
+        "type": "show",
+        "season_number": 2,
+        "description": "Season 2",
+        "url": "https:\/\/www.jiosaavn.com\/shows\/kabir-ke-dohe\/2\/7,i-JMM5Peg_",
+        "position": 1
+      },
+      {
+        "id": "122",
+        "title": "C se Crime",
+        "image": "https:\/\/c.sop.saavncdn.com\/K-Se-Crime-Episode-500x500.jpg",
+        "type": "show",
+        "season_number": 1,
+        "description": "Season 1",
+        "url": "https:\/\/www.jiosaavn.com\/shows\/c-se-crime\/1\/etXN-wLiHhc_",
+        "position": 2
+      },
+      {
+        "id": "199260",
+        "title": "Aamir Khan Presents Laal Singh Chaddha Ki Kahaniyaan",
+        "image": "https:\/\/c.sop.saavncdn.com\/Aamir-Khan-Presents-Laal-Singh-Chaddha-Ki-Kahaniyaan-20220505070612-500x500.jpg",
+        "type": "show",
+        "season_number": 1,
+        "description": "Season 1",
+        "url": "https:\/\/www.jiosaavn.com\/shows\/aamir-khan-presents-laal-singh-chaddha-ki-kahaniyaan\/1\/9LyAQWLeTFs_",
+        "position": 3
+      }
+    ],
+    "position": 5
+  },
+  "episodes": {
+    "data": [],
+    "position": 6
+  }
+}
