@@ -121,39 +121,47 @@ class SearchScreen extends StatelessWidget {
                                                     ),
                                                     clipBehavior:
                                                         Clip.antiAlias,
-                                                    child: CachedNetworkImage(
-                                                      fit: BoxFit.cover,
-                                                      errorWidget:
-                                                          (context, _, __) =>
-                                                              Image(
-                                                        fit: BoxFit.cover,
-                                                        image: AssetImage(
-                                                          key == 'Artists' ||
-                                                                  (key ==
-                                                                      'Top Result')
-                                                              ? 'assets/images/artist.png'
-                                                              : key == 'Songs'
-                                                                  ? 'assets/images/cover.jpg'
-                                                                  : 'assets/images/album.png',
-                                                        ),
-                                                      ),
-                                                      imageUrl:
-                                                          '${value[index].artwork?.replaceAll('http:', 'https:')}',
-                                                      placeholder:
-                                                          (context, url) =>
-                                                              Image(
-                                                        fit: BoxFit.cover,
-                                                        image: AssetImage(
-                                                          key == 'Artists' ||
-                                                                  (key ==
-                                                                      'Top Result')
-                                                              ? 'assets/images/artist.png'
-                                                              : key == 'Songs'
-                                                                  ? 'assets/images/cover.jpg'
-                                                                  : 'assets/images/album.png',
-                                                        ),
-                                                      ),
-                                                    ),
+                                                    child: value[index]
+                                                                .artwork ==
+                                                            null
+                                                        ? null
+                                                        : CachedNetworkImage(
+                                                            fit: BoxFit.cover,
+                                                            errorWidget:
+                                                                (context, _,
+                                                                        __) =>
+                                                                    Image(
+                                                              fit: BoxFit.cover,
+                                                              image: AssetImage(
+                                                                key == 'Artists' ||
+                                                                        (key ==
+                                                                            'Top Result')
+                                                                    ? 'assets/images/artist.png'
+                                                                    : key ==
+                                                                            'Songs'
+                                                                        ? 'assets/images/cover.jpg'
+                                                                        : 'assets/images/album.png',
+                                                              ),
+                                                            ),
+                                                            imageUrl:
+                                                                '${value[index].artwork?.replaceAll('http:', 'https:')}',
+                                                            placeholder:
+                                                                (context,
+                                                                        url) =>
+                                                                    Image(
+                                                              fit: BoxFit.cover,
+                                                              image: AssetImage(
+                                                                key == 'Artists' ||
+                                                                        (key ==
+                                                                            'Top Result')
+                                                                    ? 'assets/images/artist.png'
+                                                                    : key ==
+                                                                            'Songs'
+                                                                        ? 'assets/images/cover.jpg'
+                                                                        : 'assets/images/album.png',
+                                                              ),
+                                                            ),
+                                                          ),
                                                   ),
                                                   trailing: key != 'Albums'
                                                       ? key == 'Songs'

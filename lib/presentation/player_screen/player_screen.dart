@@ -1,4 +1,3 @@
-import 'package:audio_manager/audio_manager.dart';
 import 'package:solution_ke/widgets/common_music_player.dart';
 
 import 'controller/player_controller.dart';
@@ -54,9 +53,6 @@ class PlayerScreen extends GetWidget<PlayerController> {
           ),
           backgroundColor: Colors.transparent,
           body: Container(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).padding.top +
-                      MediaQuery.of(context).viewPadding.top),
               width: double.infinity,
               child: SingleChildScrollView(
                   child: Column(
@@ -64,19 +60,20 @@ class PlayerScreen extends GetWidget<PlayerController> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [MusicPlayerWidget()]))),
-          bottomNavigationBar: Container(
-            height: 70,
+          bottomNavigationBar: SizedBox(
+            height: 60,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                     height: 1,
                     width: double.infinity,
-                    margin: EdgeInsets.only(bottom: 10),
                     decoration:
                         BoxDecoration(color: ColorConstant.whiteA70026)),
                 Padding(
                     padding:
-                        EdgeInsets.only(left: 25, right: 25, bottom: 4, top: 4),
+                        EdgeInsets.only(left: 25, right: 25, bottom: 8, top: 8),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,

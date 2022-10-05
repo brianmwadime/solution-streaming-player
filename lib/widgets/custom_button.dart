@@ -294,7 +294,7 @@ class CustomButton extends StatelessWidget {
       case ButtonFontStyle.PoppinsMedium12:
         return TextStyle(
           color: ColorConstant.whiteA700,
-          fontSize: 12,
+          fontSize: 14,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w500,
         );

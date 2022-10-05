@@ -34,7 +34,7 @@ class MusicPlayerWidget extends StatelessWidget {
                                           .audioManager
                                           .audioList[controller.curIndex.value]
                                           .coverUrl,
-                                  height: 340,
+                                  height: 300,
                                   width: double.infinity),
                               Padding(
                                   padding: EdgeInsets.only(
@@ -64,7 +64,7 @@ class MusicPlayerWidget extends StatelessWidget {
                             ])
                       ])),
                   Padding(
-                      padding: EdgeInsets.only(left: 25, top: 20, right: 25),
+                      padding: EdgeInsets.only(left: 0, top: 8, right: 0),
                       child: SliderTheme(
                           data: SliderThemeData(
                               trackShape: RoundedRectSliderTrackShape(),
@@ -78,14 +78,12 @@ class MusicPlayerWidget extends StatelessWidget {
                                 controller.slider.value = value;
                               },
                               onChangeEnd: (value) {
-                                if (controller.duration.value != null) {
-                                  Duration msec = Duration(
-                                      milliseconds: (controller.duration.value
-                                                  .inMilliseconds *
-                                              value)
-                                          .round());
-                                  controller.audioManager.seekTo(msec);
-                                }
+                                Duration msec = Duration(
+                                    milliseconds: (controller
+                                                .duration.value.inMilliseconds *
+                                            value)
+                                        .round());
+                                controller.audioManager.seekTo(msec);
                               })))),
                   Padding(
                       padding: EdgeInsets.only(left: 25, top: 0, right: 25),
@@ -104,7 +102,7 @@ class MusicPlayerWidget extends StatelessWidget {
                                     style: AppStyle.txtPoppinsRegular12Gray500)
                               ]))),
                   Padding(
-                      padding: EdgeInsets.only(left: 25, top: 25, right: 25),
+                      padding: EdgeInsets.only(left: 25, top: 12, right: 25),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,

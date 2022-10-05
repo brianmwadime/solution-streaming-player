@@ -297,7 +297,7 @@ class LoginScreen extends GetWidget<LoginController> {
                                                   padding: IconButtonPadding
                                                       .PaddingAll5,
                                                   onTap: () {
-                                                    onTapBtntf1();
+                                                    onTapBtnFacebook();
                                                   },
                                                   child: CommonImageView(
                                                       svgPath: ImageConstant
@@ -349,7 +349,7 @@ class LoginScreen extends GetWidget<LoginController> {
     }
   }
 
-  onTapBtntf1() async {
+  onTapBtnFacebook() async {
     var url = 'https://www.facebook.com/login/';
     if (!await launch(url)) {
       throw 'Could not launch https://www.facebook.com/login/';
