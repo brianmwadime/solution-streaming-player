@@ -25,7 +25,7 @@ class PlayerScreen extends GetWidget<PlayerController> {
         child: SafeArea(
             child: Scaffold(
           resizeToAvoidBottomInset: false,
-          // extendBodyBehindAppBar: true,
+          extendBodyBehindAppBar: false,
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.expand_more_rounded),

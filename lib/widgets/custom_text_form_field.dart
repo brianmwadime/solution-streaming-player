@@ -22,41 +22,41 @@ class CustomTextFormField extends StatelessWidget {
       this.suffixConstraints,
       this.validator});
 
-  TextFormFieldShape? shape;
+  final TextFormFieldShape? shape;
 
-  TextFormFieldPadding? padding;
+  final TextFormFieldPadding? padding;
 
-  TextFormFieldVariant? variant;
+  final TextFormFieldVariant? variant;
 
-  TextFormFieldFontStyle? fontStyle;
+  final TextFormFieldFontStyle? fontStyle;
 
-  Alignment? alignment;
+  final Alignment? alignment;
 
-  double? width;
+  final double? width;
 
-  EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? margin;
 
-  TextEditingController? controller;
+  final TextEditingController? controller;
 
-  FocusNode? focusNode;
+  final FocusNode? focusNode;
 
-  bool? isObscureText;
+  final bool? isObscureText;
 
-  TextInputAction? textInputAction;
+  final TextInputAction? textInputAction;
 
-  int? maxLines;
+  final int? maxLines;
 
-  String? hintText;
+  final String? hintText;
 
-  Widget? prefix;
+  final Widget? prefix;
 
-  BoxConstraints? prefixConstraints;
+  final BoxConstraints? prefixConstraints;
 
-  Widget? suffix;
+  final Widget? suffix;
 
-  BoxConstraints? suffixConstraints;
+  final BoxConstraints? suffixConstraints;
 
-  FormFieldValidator<String>? validator;
+  final FormFieldValidator<String>? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -108,18 +108,14 @@ class CustomTextFormField extends StatelessWidget {
       case TextFormFieldFontStyle.PoppinsMedium14:
         return TextStyle(
           color: ColorConstant.whiteA700,
-          fontSize: getFontSize(
-            14,
-          ),
+          fontSize: 14,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w500,
         );
       default:
         return TextStyle(
           color: ColorConstant.whiteA700,
-          fontSize: getFontSize(
-            14,
-          ),
+          fontSize: 14,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w400,
         );

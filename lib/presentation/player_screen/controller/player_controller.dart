@@ -1,4 +1,5 @@
 import 'package:audio_manager/audio_manager.dart';
+import 'package:solution_ke/core/utils/player_utils.dart';
 
 import '/core/app_export.dart';
 import 'package:solution_ke/data/models/song/song_response.dart';
@@ -14,7 +15,7 @@ class PlayerController extends GetxController {
   Rx<double> slider = 0.0.obs;
   Rx<String?>? error;
   Rx<int> curIndex = 0.obs;
-  Rx<PlayMode> playMode = PlayMode.single.obs;
+  Rx<PlayMode> playMode = PlayMode.sequence.obs;
 
   @override
   void onInit() {
@@ -45,6 +46,7 @@ class PlayerController extends GetxController {
   }
 
   updatePlaylist(List<Song> songs) {
+    audioManager.stop();
     audioManager.audioList = songs
         .map((e) => AudioInfo(e.filePath!,
             title: e.name!,
@@ -53,7 +55,16 @@ class PlayerController extends GetxController {
         .toList();
 
     audioManager.intercepter = true;
-    audioManager.play(auto: false);
+    audioManager.play(auto: true);
+    update();
+  }
+
+  updateRecentPlaylist(List<AudioInfo> songs) {
+    audioManager.stop();
+    audioManager.audioList = songs;
+
+    audioManager.intercepter = true;
+    audioManager.play(auto: true);
     update();
   }
 
@@ -66,7 +77,7 @@ class PlayerController extends GetxController {
               "start load data callback, curIndex is ${audioManager.curIndex}");
           position.value = audioManager.position;
           duration.value = audioManager.duration;
-          slider.value = 0;
+
           curIndex.value = audioManager.curIndex;
           update();
 
@@ -83,23 +94,24 @@ class PlayerController extends GetxController {
           break;
         case AudioManagerEvents.seekComplete:
           position.value = audioManager.position;
-          slider.value =
-              position.value.inMilliseconds / duration.value.inMilliseconds;
+
           update();
           print("seek event is completed. position is [$args]/ms");
           break;
         case AudioManagerEvents.buffering:
           print("buffering $args");
-          update();
+
           break;
         case AudioManagerEvents.playstatus:
           isPlaying.value = audioManager.isPlaying;
+          if (isPlaying.value) {
+            addRecentlyPlayed(audioManager.audioList[curIndex.value]);
+          }
           update();
           break;
         case AudioManagerEvents.timeupdate:
           position.value = audioManager.position;
-          slider.value =
-              position.value.inMilliseconds / duration.value.inMilliseconds;
+
           update();
 
           audioManager.updateLrc(args["position"].toString());
@@ -110,14 +122,15 @@ class PlayerController extends GetxController {
           break;
         case AudioManagerEvents.ended:
           audioManager.next();
-          update();
-
           break;
         case AudioManagerEvents.volumeChange:
           break;
         case AudioManagerEvents.next:
         case AudioManagerEvents.previous:
           curIndex.value = audioManager.curIndex;
+          update();
+          break;
+        case AudioManagerEvents.stop:
           update();
           break;
         default:

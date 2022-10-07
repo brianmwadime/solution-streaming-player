@@ -247,7 +247,6 @@ class AlbumScreen extends GetWidget<AlbumController> {
   }
 
   onTapSong(List<Song> songs) {
-    Get.find<PlayerController>().audioManager.stop();
     Get.find<PlayerController>().updatePlaylist(songs);
     Get.toNamed(AppRoutes.playerScreen,
         arguments: {NavigationArgs.songs: songs});

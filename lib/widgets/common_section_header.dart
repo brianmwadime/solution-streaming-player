@@ -20,21 +20,24 @@ class SectionHeaderWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.left,
                   style: AppStyle.txtPoppinsSemiBold18),
-              Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text("lbl_view_all".tr,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.left,
-                        style: AppStyle.txtPoppinsMedium11),
-                    Padding(
-                        padding: EdgeInsets.only(left: 10),
-                        child: CommonImageView(
-                            svgPath: ImageConstant.imgChevicon,
-                            height: 10,
-                            width: 5))
-                  ])
+              GestureDetector(
+                onTap: onTapMore,
+                child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text("lbl_view_all".tr,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.left,
+                          style: AppStyle.txtPoppinsMedium11),
+                      Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: CommonImageView(
+                              svgPath: ImageConstant.imgChevicon,
+                              height: 10,
+                              width: 5))
+                    ]),
+              )
             ]));
   }
 }

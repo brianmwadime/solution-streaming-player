@@ -27,7 +27,12 @@ dependencies:
   images_picker: ^1.2.11
   url_launcher: 6.0.20
   audio_manager: ^0.8.2
-  # assets_audio_player:
+  flutter_displaymode: ^0.4.0
+  sliding_up_panel: ^2.0.0+1
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  share_plus: ^4.0.10
+  path_provider: ^2.0.11
 dev_dependencies:
   flutter_test:
     sdk: flutter

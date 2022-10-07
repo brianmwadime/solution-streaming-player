@@ -10,7 +10,7 @@ class DashboardController extends GetxController {
 
   Rx<BottomBarEnum> type = BottomBarEnum.Home.obs;
 
-  var tabIndex = 0;
+  Rx<int> tabIndex = 0.obs;
 
   @override
   void onReady() {
@@ -24,7 +24,7 @@ class DashboardController extends GetxController {
   }
 
   void changeTabIndex(int index) {
-    tabIndex = index;
+    tabIndex.value = index;
     update();
   }
 }

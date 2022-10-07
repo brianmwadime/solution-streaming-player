@@ -57,7 +57,7 @@ class PurchaseItemWidget extends StatelessWidget {
         Text(
           "lbl_kes_500".tr,
           overflow: TextOverflow.ellipsis,
-          style: AppStyle.txtPoppinsRegular9,
+          style: AppStyle.txtPoppinsRegular12,
         ),
       ],
     );

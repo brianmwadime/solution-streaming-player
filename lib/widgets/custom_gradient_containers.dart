@@ -78,7 +78,7 @@ class _BottomGradientContainerState extends State<BottomGradientContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: widget.margin ?? const EdgeInsets.fromLTRB(25, 0, 25, 25),
+      margin: widget.margin ?? const EdgeInsets.fromLTRB(10, 0, 10, 10),
       padding: widget.padding ?? const EdgeInsets.fromLTRB(10, 15, 10, 15),
       decoration: BoxDecoration(
         borderRadius: widget.borderRadius ??

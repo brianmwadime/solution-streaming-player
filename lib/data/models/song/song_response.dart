@@ -1,3 +1,4 @@
+import 'package:solution_ke/data/models/album/album_response.dart';
 import 'package:solution_ke/data/models/updateProfile/profile_response.dart';
 
 class SongResponse {
@@ -41,6 +42,7 @@ class Song {
   String? updatedAt;
   int? addedBy;
   UserProfile? artist;
+  Album? album;
   int? updatedBy;
   int? fileType;
   String? artwork;
@@ -61,6 +63,7 @@ class Song {
       this.updatedAt,
       this.addedBy,
       this.artist,
+      this.album,
       this.updatedBy,
       this.fileType,
       this.artwork,
@@ -83,6 +86,7 @@ class Song {
     artist = json['_addedBy'] != null
         ? UserProfile.fromJson(json['_addedBy'])
         : null;
+    album = json['_albumId'] != null ? Album.fromJson(json['_albumId']) : null;
     updatedBy = json['updatedBy'];
     fileType = json['fileType'];
     artwork = json['artwork'];
@@ -129,6 +133,10 @@ class Song {
 
     if (this.artist != null) {
       data['artist'] = this.artist?.toJson();
+    }
+
+    if (this.album != null) {
+      data['album'] = this.album?.toJson();
     }
 
     if (this.updatedBy != null) {

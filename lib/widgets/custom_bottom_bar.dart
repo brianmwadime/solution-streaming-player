@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:solution_ke/core/app_export.dart';
 
 class CustomBottomBar extends StatelessWidget {
-  CustomBottomBar({this.onChanged});
-
-  final RxInt selectedIndex = 0.obs;
+  CustomBottomBar({required this.selectedIndex, this.onChanged});
 
   final List<BottomMenuModel> bottomMenuList = [
     BottomMenuModel(
@@ -24,84 +22,82 @@ class CustomBottomBar extends StatelessWidget {
     )
   ];
 
-  final Function(BottomBarEnum)? onChanged;
+  final Function(BottomBarEnum, int)? onChanged;
+  final int selectedIndex;
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
-      () => SizedBox(
-        child: BottomNavigationBar(
-          backgroundColor: ColorConstant.tealA400,
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          iconSize: 20,
-          selectedItemColor: ColorConstant.black901,
-          unselectedItemColor: ColorConstant.whiteA700,
-          selectedFontSize: 12,
-          unselectedFontSize: 12,
-          elevation: 0,
-          currentIndex: selectedIndex.value,
-          type: BottomNavigationBarType.fixed,
-          items: List.generate(bottomMenuList.length, (index) {
-            return BottomNavigationBarItem(
-                icon: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CommonImageView(
-                      svgPath: bottomMenuList[index].icon,
-                      color: ColorConstant.whiteA700,
-                    ),
-                    // Padding(
-                    //   padding: EdgeInsets.only(
-                    //     top: 2,
-                    //   ),
-                    //   child: Text(
-                    //     bottomMenuList[index].title ?? "",
-                    //     overflow: TextOverflow.ellipsis,
-                    //     textAlign: TextAlign.left,
-                    //     style: AppStyle.txtPoppinsMedium12WhiteA700.copyWith(
-                    //       // height: 1.00,
-                    //       color: ColorConstant.whiteA700,
-                    //     ),
-                    //   ),
-                    // ),
-                  ],
-                ),
-                activeIcon: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    CommonImageView(
-                      svgPath: bottomMenuList[index].icon,
-                      color: ColorConstant.black901,
-                    ),
-                    // Padding(
-                    //   padding: EdgeInsets.only(
-                    //     top: 2,
-                    //   ),
-                    //   child: Text(
-                    //     bottomMenuList[index].title ?? "",
-                    //     overflow: TextOverflow.ellipsis,
-                    //     textAlign: TextAlign.left,
-                    //     style: AppStyle.txtPoppinsMedium12Black902.copyWith(
-                    //       // height: 1.00,
-                    //       color: ColorConstant.black902,
-                    //     ),
-                    //   ),
-                    // ),
-                  ],
-                ),
-                label: bottomMenuList[index].title,
-                tooltip: bottomMenuList[index].title);
-          }),
-          onTap: (index) {
-            selectedIndex.value = index;
-            onChanged!(bottomMenuList[index].type);
-          },
-        ),
+    return SizedBox(
+      child: BottomNavigationBar(
+        backgroundColor: ColorConstant.tealA400,
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        iconSize: 20,
+        selectedItemColor: ColorConstant.black901,
+        unselectedItemColor: ColorConstant.whiteA700,
+        selectedFontSize: 12,
+        unselectedFontSize: 12,
+        elevation: 0,
+        currentIndex: selectedIndex,
+        type: BottomNavigationBarType.fixed,
+        items: List.generate(bottomMenuList.length, (index) {
+          return BottomNavigationBarItem(
+              icon: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CommonImageView(
+                    svgPath: bottomMenuList[index].icon,
+                    color: ColorConstant.whiteA700,
+                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.only(
+                  //     top: 2,
+                  //   ),
+                  //   child: Text(
+                  //     bottomMenuList[index].title ?? "",
+                  //     overflow: TextOverflow.ellipsis,
+                  //     textAlign: TextAlign.left,
+                  //     style: AppStyle.txtPoppinsMedium12WhiteA700.copyWith(
+                  //       // height: 1.00,
+                  //       color: ColorConstant.whiteA700,
+                  //     ),
+                  //   ),
+                  // ),
+                ],
+              ),
+              activeIcon: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  CommonImageView(
+                    svgPath: bottomMenuList[index].icon,
+                    color: ColorConstant.black901,
+                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.only(
+                  //     top: 2,
+                  //   ),
+                  //   child: Text(
+                  //     bottomMenuList[index].title ?? "",
+                  //     overflow: TextOverflow.ellipsis,
+                  //     textAlign: TextAlign.left,
+                  //     style: AppStyle.txtPoppinsMedium12Black902.copyWith(
+                  //       // height: 1.00,
+                  //       color: ColorConstant.black902,
+                  //     ),
+                  //   ),
+                  // ),
+                ],
+              ),
+              label: bottomMenuList[index].title,
+              tooltip: bottomMenuList[index].title);
+        }),
+        onTap: (index) {
+          onChanged!(bottomMenuList[index].type, index);
+        },
       ),
     );
   }

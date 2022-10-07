@@ -7,7 +7,6 @@ import 'widgets/sound_item_widget.dart';
 import 'widgets/pill_item_item_widget.dart';
 import 'controller/homepage_controller.dart';
 import 'models/artist_item_model.dart';
-import 'models/album_item_model.dart';
 import 'models/soundlevel_item_model.dart';
 import 'models/genre_item_model.dart';
 import 'package:flutter/material.dart';
@@ -236,34 +235,43 @@ class HomepageScreen extends GetWidget<HomepageController> {
                                     .homepageModelObj
                                     .value
                                     .categoryItemsList[index];
-                                return GenrePillItemItemWidget(model);
+                                return GestureDetector(
+                                    onTap: () => Get.toNamed(
+                                            AppRoutes.songsScreen,
+                                            arguments: {
+                                              NavigationArgs.typeId: model.id,
+                                              NavigationArgs.pageType: 2,
+                                              NavigationArgs.pageTitle:
+                                                  model.name
+                                            }),
+                                    child: GenrePillItemItemWidget(model));
                               },
                               separatorBuilder:
                                   (BuildContext context, int index) => SizedBox(
                                 width: 20,
                               ),
                             ))),
-                    Container(
-                        height: 200,
-                        width: double.infinity,
-                        child: Obx(() => ListView.separated(
-                            padding:
-                                EdgeInsets.only(left: 20, top: 20, right: 20),
-                            scrollDirection: Axis.horizontal,
-                            physics: BouncingScrollPhysics(),
-                            itemCount: controller.homepageModelObj.value
-                                .categorySoundtemList.length,
-                            separatorBuilder:
-                                (BuildContext context, int index) => SizedBox(
-                                      width: 20,
-                                    ),
-                            itemBuilder: (context, index) {
-                              SoundLevelItemModel model = controller
-                                  .homepageModelObj
-                                  .value
-                                  .categorySoundtemList[index];
-                              return SoundLevelItemWidget(model);
-                            })))
+                    // Container(
+                    //     height: 200,
+                    //     width: double.infinity,
+                    //     child: Obx(() => ListView.separated(
+                    //         padding:
+                    //             EdgeInsets.only(left: 20, top: 20, right: 20),
+                    //         scrollDirection: Axis.horizontal,
+                    //         physics: BouncingScrollPhysics(),
+                    //         itemCount: controller.homepageModelObj.value
+                    //             .categorySoundtemList.length,
+                    //         separatorBuilder:
+                    //             (BuildContext context, int index) => SizedBox(
+                    //                   width: 20,
+                    //                 ),
+                    //         itemBuilder: (context, index) {
+                    //           SoundLevelItemModel model = controller
+                    //               .homepageModelObj
+                    //               .value
+                    //               .categorySoundtemList[index];
+                    //           return SoundLevelItemWidget(model);
+                    //         })))
                   ]))),
     ));
   }

@@ -1,4 +1,5 @@
 import 'package:solution_ke/presentation/account_screen/widgets/account_item.dart';
+import 'package:solution_ke/presentation/player_screen/controller/player_controller.dart';
 
 import 'controller/account_controller.dart';
 import 'package:flutter/material.dart';
@@ -109,6 +110,11 @@ class AccountScreen extends GetWidget<AccountController> {
                         Get.toNamed(AppRoutes.purchaseHistoryScreen),
                   ),
                   AccountItemWidget(
+                    title: "playlists".tr,
+                    icon: ImageConstant.imgPlay10X7,
+                    onClicked: () => Get.toNamed(AppRoutes.playlistsScreen),
+                  ),
+                  AccountItemWidget(
                     title: "msg_terms_of_servic".tr,
                     icon: ImageConstant.imgCar,
                     onClicked: () =>
@@ -128,6 +134,8 @@ class AccountScreen extends GetWidget<AccountController> {
   }
 
   logout() {
+    Get.find<PlayerController>().audioManager.stop();
+    Get.find<PlayerController>().audioManager.release();
     controller.logout(successCall: _onSuccess);
   }
 

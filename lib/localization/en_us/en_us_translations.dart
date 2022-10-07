@@ -138,6 +138,7 @@ final Map<String, String> enUs = {
   "lbl_recent": "Recent",
   "msg_terms_of_servic": "Terms of Service",
   "msg_purchase_histor": "Purchase History",
+  "playlists": "Playlists",
   "lbl_songs": "Songs",
   "lbl_or": "or",
   "lbl_uliza_kiatu": "Uliza Kiatu",
@@ -146,5 +147,12 @@ final Map<String, String> enUs = {
   "msg_onboarding_arti": "Onboarding artists",
   "lbl_02_30": "02:30",
   "msg_have_account_l": "Have account? Let’s ",
-  "lbl_hart_the_band": "Hart The Band"
+  "lbl_hart_the_band": "Hart The Band",
+  "create_new_playlist": "Create New Playlist",
+  "create_playlist": "Create Playlist",
+  "cancel": "Cancel",
+  "ok": "OK",
+  "rename": "Rename",
+  "share": "Share",
+  "delete": "Delete"
 };

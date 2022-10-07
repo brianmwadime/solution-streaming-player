@@ -203,6 +203,139 @@ class ApiClient extends GetConnect {
     }
   }
 
+  Future createPlaylist(
+      {Function(dynamic data)? onSuccess,
+      Function(dynamic error)? onError,
+      Map<String, String> headers = const {},
+      Map requestData = const {}}) async {
+    ProgressDialogUtils.showProgressDialog();
+    try {
+      await isNetworkConnected();
+      Response response = await httpClient.post(
+          '$url/device/api/v1/playlist/create',
+          headers: headers,
+          body: requestData);
+      ProgressDialogUtils.hideProgressDialog();
+      if (_isSuccessCall(response)) {
+        onSuccess!(response.body);
+      } else {
+        onError!(
+          response.hasError ? response.body : 'Something Went Wrong!',
+        );
+      }
+    } catch (error, stackTrace) {
+      ProgressDialogUtils.hideProgressDialog();
+      Logger.log(error, stackTrace: stackTrace);
+      onError!(error);
+    }
+  }
+
+  Future addSongToPlaylist(
+      {Function(dynamic data)? onSuccess,
+      Function(dynamic error)? onError,
+      Map<String, String> headers = const {},
+      Map requestData = const {}}) async {
+    ProgressDialogUtils.showProgressDialog();
+    try {
+      await isNetworkConnected();
+      Response response = await httpClient.post(
+          '$url/device/api/v1/playlist_track/create',
+          headers: headers,
+          body: requestData);
+      ProgressDialogUtils.hideProgressDialog();
+      if (_isSuccessCall(response)) {
+        onSuccess!(response.body);
+      } else {
+        onError!(
+          response.hasError ? response.body : 'Something Went Wrong!',
+        );
+      }
+    } catch (error, stackTrace) {
+      ProgressDialogUtils.hideProgressDialog();
+      Logger.log(error, stackTrace: stackTrace);
+      onError!(error);
+    }
+  }
+
+  Future removeSongToPlaylist(
+      {dynamic id,
+      Function(dynamic data)? onSuccess,
+      Function(dynamic error)? onError,
+      Map<String, String> headers = const {}}) async {
+    ProgressDialogUtils.showProgressDialog();
+    try {
+      await isNetworkConnected();
+      Response response = await httpClient.delete(
+          '$url/device/api/v1/playlist_track/delete/$id',
+          headers: headers);
+      ProgressDialogUtils.hideProgressDialog();
+      if (_isSuccessCall(response)) {
+        onSuccess!(response.body);
+      } else {
+        onError!(
+          response.hasError ? response.body : 'Something Went Wrong!',
+        );
+      }
+    } catch (error, stackTrace) {
+      ProgressDialogUtils.hideProgressDialog();
+      Logger.log(error, stackTrace: stackTrace);
+      onError!(error);
+    }
+  }
+
+  Future updatePlaylist(dynamic playlistId,
+      {Function(dynamic data)? onSuccess,
+      Function(dynamic error)? onError,
+      Map<String, String> headers = const {},
+      Map requestData = const {}}) async {
+    ProgressDialogUtils.showProgressDialog();
+    try {
+      await isNetworkConnected();
+      Response response = await httpClient.put(
+          '$url/device/api/v1/playlist/update/$playlistId',
+          headers: headers,
+          body: requestData);
+      ProgressDialogUtils.hideProgressDialog();
+      if (_isSuccessCall(response)) {
+        onSuccess!(response.body);
+      } else {
+        onError!(
+          response.hasError ? response.body : 'Something Went Wrong!',
+        );
+      }
+    } catch (error, stackTrace) {
+      ProgressDialogUtils.hideProgressDialog();
+      Logger.log(error, stackTrace: stackTrace);
+      onError!(error);
+    }
+  }
+
+  Future deletePlaylist(dynamic playlistId,
+      {Function(dynamic data)? onSuccess,
+      Function(dynamic error)? onError,
+      Map<String, String> headers = const {},
+      Map requestData = const {}}) async {
+    ProgressDialogUtils.showProgressDialog();
+    try {
+      await isNetworkConnected();
+      Response response = await httpClient.delete(
+          '$url/device/api/v1/playlist/delete/$playlistId',
+          headers: headers);
+      ProgressDialogUtils.hideProgressDialog();
+      if (_isSuccessCall(response)) {
+        onSuccess!(response.body);
+      } else {
+        onError!(
+          response.hasError ? response.body : 'Something Went Wrong!',
+        );
+      }
+    } catch (error, stackTrace) {
+      ProgressDialogUtils.hideProgressDialog();
+      Logger.log(error, stackTrace: stackTrace);
+      onError!(error);
+    }
+  }
+
   Future updateProfile(
       {Function(dynamic data)? onSuccess,
       Function(dynamic error)? onError,

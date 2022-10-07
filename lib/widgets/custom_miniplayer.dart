@@ -47,28 +47,23 @@ class MiniPlayer extends StatelessWidget {
                           ),
                         ),
                         child: Center(
-                          child: Obx(() => Material(
-                                color: Colors.white,
-                                shadowColor: Colors.transparent,
-                                shape: null,
-                                elevation: 0,
-                                child: Slider(
-                                    inactiveColor: Colors.transparent,
-                                    value: controller.slider.value,
-                                    onChanged: (value) {
-                                      controller.slider.value = value;
-                                    },
-                                    onChangeEnd: (value) {
-                                      if (controller.duration.value != null) {
-                                        Duration msec = Duration(
-                                            milliseconds: (controller.duration
-                                                        .value.inMilliseconds *
-                                                    value)
-                                                .round());
-                                        controller.audioManager.seekTo(msec);
-                                      }
-                                    }),
-                              )),
+                          child: Material(
+                            color: Colors.white,
+                            shadowColor: Colors.transparent,
+                            shape: null,
+                            elevation: 0,
+                            child: Slider(
+                                inactiveColor: Colors.transparent,
+                                value: controller.position.value.inMilliseconds
+                                    .toDouble(),
+                                max: controller.duration.value.inMilliseconds
+                                    .toDouble(),
+                                onChanged: (newPosition) {
+                                  controller.audioManager.seekTo(Duration(
+                                      milliseconds: newPosition.round()));
+                                },
+                                onChangeEnd: (value) {}),
+                          ),
                         )),
                     Card(
                       margin: const EdgeInsets.symmetric(

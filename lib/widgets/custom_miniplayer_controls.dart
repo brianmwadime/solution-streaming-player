@@ -24,13 +24,14 @@ class ControlButtons extends StatelessWidget {
         init: PlayerController(),
         builder: ((controller) => Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: buttons.map<Widget>((e) {
                 switch (e) {
                   case 'Previous':
                     return IconButton(
                       icon: const Icon(Icons.skip_previous_rounded),
-                      iconSize: miniplayer ? 24.0 : 45.0,
+                      iconSize: miniplayer ? 32.0 : 45.0,
                       tooltip: "Skip Previous",
                       color: dominantColor ?? Theme.of(context).iconTheme.color,
                       onPressed: () => audioHandler.previous(),
@@ -58,6 +59,7 @@ class ControlButtons extends StatelessWidget {
                                 child: controller.isPlaying.value
                                     ? IconButton(
                                         tooltip: "Pause",
+                                        // iconSize: miniplayer ? 32.0 : 45.0,
                                         onPressed: () =>
                                             audioHandler.playOrPause(),
                                         icon: const Icon(
@@ -68,6 +70,7 @@ class ControlButtons extends StatelessWidget {
                                       )
                                     : IconButton(
                                         tooltip: "Play Song",
+                                        // iconSize: miniplayer ? 32.0 : 45.0,
                                         onPressed: () =>
                                             audioHandler.playOrPause(),
                                         icon: const Icon(
@@ -116,7 +119,7 @@ class ControlButtons extends StatelessWidget {
                   case 'Next':
                     return IconButton(
                       icon: const Icon(Icons.skip_next_rounded),
-                      iconSize: miniplayer ? 24.0 : 45.0,
+                      iconSize: miniplayer ? 32.0 : 45.0,
                       tooltip: "Skip Next",
                       color: dominantColor ?? Theme.of(context).iconTheme.color,
                       onPressed: () => audioHandler.next(),
