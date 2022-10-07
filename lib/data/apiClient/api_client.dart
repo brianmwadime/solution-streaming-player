@@ -25,7 +25,7 @@ class ApiClient extends GetConnect {
         //   snackPosition: SnackPosition.BOTTOM,
         // );
         Get.find<PrefUtils>().clearPreferencesData();
-        Get.offNamed(AppRoutes.loginScreen);
+        Get.offAllNamed(AppRoutes.initialRoute);
       }
 
       return response;
@@ -474,6 +474,33 @@ class ApiClient extends GetConnect {
       await isNetworkConnected();
       Response response = await httpClient.post(
           '$url/device/api/v1/playlist/list',
+          headers: headers,
+          body: requestData);
+      ProgressDialogUtils.hideProgressDialog();
+      if (_isSuccessCall(response)) {
+        onSuccess!(response.body);
+      } else {
+        onError!(
+          response.hasError ? response.body : 'Something Went Wrong!',
+        );
+      }
+    } catch (error, stackTrace) {
+      ProgressDialogUtils.hideProgressDialog();
+      Logger.log(error, stackTrace: stackTrace);
+      onError!(error);
+    }
+  }
+
+  Future fetchPlaylistSongs(
+      {Function(dynamic data)? onSuccess,
+      Function(dynamic error)? onError,
+      Map<String, String> headers = const {},
+      Map requestData = const {}}) async {
+    ProgressDialogUtils.showProgressDialog();
+    try {
+      await isNetworkConnected();
+      Response response = await httpClient.post(
+          '$url/device/api/v1/playlist_track/list',
           headers: headers,
           body: requestData);
       ProgressDialogUtils.hideProgressDialog();

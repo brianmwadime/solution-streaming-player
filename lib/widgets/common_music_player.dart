@@ -74,6 +74,7 @@ class MusicPlayerWidget extends StatelessWidget {
                               thumbShape: RoundSliderThumbShape()),
                           child: Slider(
                               value: controller.position.value.inMilliseconds
+                                  .round()
                                   .toDouble(),
                               max: controller.duration.value.inMilliseconds
                                   .toDouble(),

@@ -5,9 +5,8 @@ class GoogleAuthHelper {
   Future<GoogleSignInAccount?> googleSignInProcess() async {
     GoogleSignIn _googleSignIn = GoogleSignIn();
     GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-    if (googleUser != null) {
-      return googleUser;
-    }
+
+    return googleUser;
   }
 
   /// To Check if the user is already signedin through google

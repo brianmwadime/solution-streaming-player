@@ -46,6 +46,7 @@ class PlayerController extends GetxController {
   }
 
   updatePlaylist(List<Song> songs) {
+    this.songs.value = songs;
     audioManager.stop();
     audioManager.audioList = songs
         .map((e) => AudioInfo(e.filePath!,

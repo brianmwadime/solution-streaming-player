@@ -99,19 +99,20 @@ class _SongTileTrailingMenuState extends State<SongTileTrailingMenu> {
             ],
           ),
         ),
-        PopupMenuItem(
-          value: 0,
-          child: Row(
-            children: [
-              Icon(
-                Icons.playlist_add_rounded,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              const SizedBox(width: 10.0),
-              Text("Add to Playlist"),
-            ],
+        if (!widget.isPlaylist)
+          PopupMenuItem(
+            value: 0,
+            child: Row(
+              children: [
+                Icon(
+                  Icons.playlist_add_rounded,
+                  color: Theme.of(context).iconTheme.color,
+                ),
+                const SizedBox(width: 10.0),
+                Text("Add to Playlist"),
+              ],
+            ),
           ),
-        ),
         if (widget.data["album"] != null)
           PopupMenuItem(
             value: 4,
@@ -140,19 +141,19 @@ class _SongTileTrailingMenuState extends State<SongTileTrailingMenu> {
               ],
             ),
           ),
-        PopupMenuItem(
-          value: 3,
-          child: Row(
-            children: [
-              Icon(
-                Icons.share_rounded,
-                color: Theme.of(context).iconTheme.color,
-              ),
-              const SizedBox(width: 10.0),
-              Text("Share"),
-            ],
-          ),
-        ),
+        // PopupMenuItem(
+        //   value: 3,
+        //   child: Row(
+        //     children: [
+        //       Icon(
+        //         Icons.share_rounded,
+        //         color: Theme.of(context).iconTheme.color,
+        //       ),
+        //       const SizedBox(width: 10.0),
+        //       Text("Share"),
+        //     ],
+        //   ),
+        // ),
       ],
       onSelected: (int? value) {
         final AudioInfo mediaItem =

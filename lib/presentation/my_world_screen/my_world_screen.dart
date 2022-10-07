@@ -87,7 +87,15 @@ class MyWorldScreen extends GetWidget<MyWorldController> {
                         ),
                     itemBuilder: ((context, index) {
                       return GestureDetector(
-                        onTap: (() {}),
+                        onTap: (() {
+                          Get.toNamed(AppRoutes.songsScreen, arguments: {
+                            NavigationArgs.pageType: 1,
+                            NavigationArgs.pageTitle:
+                                controller.playlists[index].name,
+                            NavigationArgs.typeId:
+                                controller.playlists[index].id
+                          });
+                        }),
                         child: PlaylistItemWidget(
                             playlist: controller.playlists[index]),
                       );

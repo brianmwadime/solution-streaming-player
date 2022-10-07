@@ -55,7 +55,7 @@ class MiniPlayer extends StatelessWidget {
                             child: Slider(
                                 inactiveColor: Colors.transparent,
                                 value: controller.position.value.inMilliseconds
-                                    .toDouble(),
+                                    .roundToDouble(),
                                 max: controller.duration.value.inMilliseconds
                                     .toDouble(),
                                 onChanged: (newPosition) {

@@ -9,8 +9,7 @@ void addToNowPlaying({
   bool showNotification = true,
 }) {
   final AudioManager audioHandler = AudioManager.instance;
-  final AudioInfo? currentMediaItem =
-      audioHandler.audioList.elementAt(audioHandler.curIndex);
+  final AudioInfo? currentMediaItem = audioHandler.info;
   if (currentMediaItem != null &&
       currentMediaItem.url.toString().startsWith('http')) {
     if (audioHandler.audioList.contains(mediaItem) && showNotification) {
@@ -43,8 +42,7 @@ void playNext(
   BuildContext context,
 ) {
   final AudioManager audioHandler = AudioManager.instance;
-  final AudioInfo? currentMediaItem =
-      audioHandler.audioList[audioHandler.curIndex];
+  final AudioInfo? currentMediaItem = audioHandler.info;
   if (currentMediaItem != null &&
       currentMediaItem.url.toString().startsWith('http')) {
     final queue = audioHandler.audioList;

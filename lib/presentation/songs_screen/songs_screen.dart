@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:solution_ke/core/app_export.dart';
 import 'package:solution_ke/presentation/songs_screen/controller/songs_controller.dart';
+import 'package:solution_ke/widgets/common_playlist_head.dart';
 import 'package:solution_ke/widgets/custom_icon_button.dart';
 import 'package:solution_ke/widgets/custom_miniplayer.dart';
 
@@ -35,6 +36,12 @@ class SongsScreen extends GetWidget<SongsController> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    if (controller.pageType.value == 1)
+                      PlaylistHead(
+                        songsList: controller.songs,
+                        offline: false,
+                        fromDownloads: false,
+                      ),
                     const SizedBox(height: 5),
                     Obx(() => ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
@@ -71,9 +78,12 @@ class SongsScreen extends GetWidget<SongsController> {
                             ),
                             trailing: SongTileTrailingMenu(
                               data: controller.songs[index].toJson(),
-                              isPlaylist: false,
+                              isPlaylist: (controller.pageType.value == 1),
                               deleteLiked: (Map item) {
-                                controller.deleteSong(item);
+                                if (controller.pageType.value == 1) {
+                                  controller.deletePlaylistTrack(
+                                      controller.typeId.value, item["id"]);
+                                }
                               },
                             ),
                           );

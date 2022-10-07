@@ -1,3 +1,4 @@
+import 'package:solution_ke/widgets/common_add_playlist.dart';
 import 'package:solution_ke/widgets/common_music_player.dart';
 
 import 'controller/player_controller.dart';
@@ -89,7 +90,15 @@ class PlayerScreen extends GetWidget<PlayerController> {
                               variant: ButtonVariant.FillWhiteA7000f,
                               shape: ButtonShape.RoundedBorder22,
                               padding: ButtonPadding.PaddingAll11,
-                              fontStyle: ButtonFontStyle.PoppinsMedium12)
+                              fontStyle: ButtonFontStyle.PoppinsMedium12,
+                              onTap: () {
+                                if (controller.audioManager.info == null)
+                                  return;
+                                var index = controller.audioManager.audioList
+                                    .indexOf(controller.audioManager.info!);
+                                AddToPlaylist().addToPlaylist(
+                                    context, controller.songs[index].toJson());
+                              })
                         ])),
               ],
             ),

@@ -94,14 +94,36 @@ class AddToPlaylist {
 
                                   await controller.addToPlaylist(request,
                                       successCall: () {
-                                    ShowSnackBar().showSnackBar(
-                                      context,
-                                      '${mediaItem["name"]} Added to ${controller.playlists[index].name}',
+                                    Get.rawSnackbar(
+                                      snackStyle: SnackStyle.FLOATING,
+                                      boxShadows: null,
+                                      backgroundGradient: null,
+                                      margin: EdgeInsets.all(10),
+                                      borderRadius: 5,
+                                      duration: Duration(seconds: 1),
+                                      backgroundColor: Colors.grey[900]!,
+                                      messageText: Text(
+                                        '${mediaItem["name"]} Added to ${controller.playlists[index].name}',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
                                     );
                                   }, errCall: () {
-                                    ShowSnackBar().showSnackBar(
-                                      context,
-                                      'Could not add song to playlist',
+                                    Get.rawSnackbar(
+                                      snackStyle: SnackStyle.FLOATING,
+                                      boxShadows: null,
+                                      backgroundGradient: null,
+                                      margin: EdgeInsets.all(10),
+                                      borderRadius: 5,
+                                      duration: Duration(seconds: 1),
+                                      backgroundColor: Colors.red,
+                                      messageText: Text(
+                                        'Could not add song to playlist',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
                                     );
                                   });
                                 }
