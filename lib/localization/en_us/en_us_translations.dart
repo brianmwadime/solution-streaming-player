@@ -72,6 +72,8 @@ final Map<String, String> enUs = {
   "lbl_njugush": "Njugush",
   "msg_www_solutions_k": "www.Solutions.ke",
   "lbl_trending": "Trending",
+  "lbl_trending_songs": "Trending Songs",
+  "lbl_popular_albums": "Popular Albums",
   "msg_confirm_payment2": "Confirm Payment\nOf KES ",
   "lbl_mamas_love": "Mamas Love",
   "lbl_22": "22",

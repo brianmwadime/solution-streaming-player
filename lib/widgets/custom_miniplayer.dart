@@ -9,10 +9,9 @@ class MiniPlayer extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<PlayerController>(
         init: PlayerController(),
-        builder: ((controller) => (controller.isPlaying.value ||
-                controller.audioManager.audioList.isNotEmpty)
+        builder: ((controller) => (controller.isPlaying.value)
             ? Dismissible(
-                key: const Key('miniplayer'),
+                key: UniqueKey(),
                 direction: DismissDirection.down,
                 onDismissed: (_) {
                   Feedback.forLongPress(context);

@@ -1,14 +1,15 @@
 import 'package:solution_ke/data/models/album/album_response.dart';
+import 'package:solution_ke/data/models/song/song_response.dart';
 
 import '../controller/homepage_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_ke/core/app_export.dart';
 
 // ignore: must_be_immutable
-class ListAlbumItemWidget extends StatelessWidget {
-  ListAlbumItemWidget(this.listavatItemModelObj);
+class ListSongItemWidget extends StatelessWidget {
+  ListSongItemWidget(this.song);
 
-  Album listavatItemModelObj;
+  Song song;
 
   var controller = Get.find<HomepageController>();
 
@@ -26,10 +27,11 @@ class ListAlbumItemWidget extends StatelessWidget {
             clipBehavior: Clip.none,
             children: [
               CommonImageView(
-                url: listavatItemModelObj.artwork,
-                imagePath: ImageConstant.imgAvatar116X156,
+                url: song.artwork,
+                imagePath: "assets/images/cover.jpg",
                 height: 125,
                 width: 155,
+                placeHolder: "assets/images/cover.jpg",
               ),
               Positioned(
                   width: 28,
@@ -59,13 +61,13 @@ class ListAlbumItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text.rich(
-                  TextSpan(text: listavatItemModelObj.name),
+                  TextSpan(text: song.name),
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.left,
                   style: AppStyle.txtPoppinsMedium14,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -79,14 +81,12 @@ class ListAlbumItemWidget extends StatelessWidget {
                         left: 5,
                       ),
                       child: Text.rich(
-                        TextSpan(
-                            text: listavatItemModelObj.songCount.toString(),
-                            children: [
-                              TextSpan(text: " Tracks"),
-                              TextSpan(text: " - "),
-                              TextSpan(
-                                  text: listavatItemModelObj.year.toString())
-                            ]),
+                        TextSpan(text: song.artist?.name.toString(), children: [
+                          // TextSpan(text: " Tracks"),
+                          // TextSpan(text: " - "),
+                          // TextSpan(
+                          //     text: song.year.toString())
+                        ]),
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.left,
                         style: AppStyle.txtPoppinsMedium12Gray500,

@@ -13,7 +13,7 @@ class SongsController extends GetxController {
   RxList<Song> songs = <Song>[].obs;
   RxString title = "Songs".obs;
 
-  // 0 - Album, 1 - Playlist, 2 - Category
+  // 0 - Album, 1 - Playlist, 2 - Category, 3 - Popular
   RxInt pageType = 0.obs;
   RxInt typeId = 1000.obs;
 
@@ -21,7 +21,10 @@ class SongsController extends GetxController {
   void onInit() {
     super.onInit();
     pageType.value = Get.arguments[NavigationArgs.pageType];
-    typeId.value = Get.arguments[NavigationArgs.typeId];
+
+    if (Get.arguments[NavigationArgs.typeId] != null) {
+      typeId.value = Get.arguments[NavigationArgs.typeId];
+    }
 
     if (Get.arguments[NavigationArgs.pageType] != null) {
       title.value = Get.arguments[NavigationArgs.pageTitle];
@@ -77,6 +80,24 @@ class SongsController extends GetxController {
               {"model": "user", "as": "_addedBy"},
               {"model": "album", "as": "_albumId"}
             ],
+          }
+        };
+
+        this.fetchSongs(
+          request,
+        );
+        break;
+
+      case 3:
+        var request = {
+          "options": {
+            "include": [
+              {"model": "user", "as": "_addedBy"}
+            ],
+            "order": [
+              ["playCount", "DESC"]
+            ],
+            "paginate": 30
           }
         };
 

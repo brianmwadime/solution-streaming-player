@@ -1,4 +1,6 @@
 import 'package:solution_ke/presentation/account_screen/binding/account_binding.dart';
+import 'package:solution_ke/presentation/albums_screen/albums_screen.dart';
+import 'package:solution_ke/presentation/albums_screen/binding/albums_binding.dart';
 import 'package:solution_ke/presentation/dashboard_screen/binding/dashboard_binding.dart';
 import 'package:solution_ke/presentation/dashboard_screen/dashboard_screen.dart';
 import 'package:solution_ke/presentation/homepage_screen/binding/homepage_binding.dart';
@@ -101,6 +103,8 @@ class AppRoutes {
 
   static String songsScreen = '/songs_screen';
 
+  static String albumsScreen = '/albums_screen';
+
   static String playlistScreen = '/playlist_screen';
 
   static String initialRoute = '/initialRoute';
@@ -174,6 +178,13 @@ class AppRoutes {
       page: () => SongsScreen(),
       bindings: [
         SongsBinding(),
+      ],
+    ),
+    GetPage(
+      name: albumsScreen,
+      page: () => AlbumsScreen(),
+      bindings: [
+        AlbumsBinding(),
       ],
     ),
     GetPage(

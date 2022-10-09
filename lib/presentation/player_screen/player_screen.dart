@@ -62,7 +62,7 @@ class PlayerScreen extends GetWidget<PlayerController> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [MusicPlayerWidget()]))),
           bottomNavigationBar: SizedBox(
-            height: 60,
+            height: 64,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,

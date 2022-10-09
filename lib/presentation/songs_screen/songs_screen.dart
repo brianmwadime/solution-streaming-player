@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:solution_ke/core/app_export.dart';
+import 'package:solution_ke/data/models/song/song_response.dart';
+import 'package:solution_ke/presentation/player_screen/controller/player_controller.dart';
 import 'package:solution_ke/presentation/songs_screen/controller/songs_controller.dart';
 import 'package:solution_ke/widgets/common_playlist_head.dart';
 import 'package:solution_ke/widgets/custom_icon_button.dart';
@@ -49,6 +51,9 @@ class SongsScreen extends GetWidget<SongsController> {
                         itemCount: controller.songs.length,
                         itemBuilder: ((context, index) {
                           return ListTile(
+                            onTap: () {
+                              onTapSong([controller.songs[index]]);
+                            },
                             leading: Card(
                               elevation: 5,
                               color: Colors.transparent,
@@ -59,10 +64,9 @@ class SongsScreen extends GetWidget<SongsController> {
                               child: SizedBox(
                                 height: 50,
                                 width: 50,
-                                child: const Image(
-                                  image: AssetImage(
-                                    'assets/images/cover.jpg',
-                                  ),
+                                child: CommonImageView(
+                                  url: controller.songs[index].artwork,
+                                  imagePath: 'assets/images/cover.jpg',
                                 ),
                               ),
                             ),
@@ -95,5 +99,11 @@ class SongsScreen extends GetWidget<SongsController> {
         MiniPlayer()
       ],
     );
+  }
+
+  onTapSong(List<Song> songs) {
+    Get.find<PlayerController>().updatePlaylist(songs);
+    Get.toNamed(AppRoutes.playerScreen,
+        arguments: {NavigationArgs.songs: songs});
   }
 }
