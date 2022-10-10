@@ -1,6 +1,8 @@
 import 'package:solution_ke/presentation/account_screen/binding/account_binding.dart';
 import 'package:solution_ke/presentation/albums_screen/albums_screen.dart';
 import 'package:solution_ke/presentation/albums_screen/binding/albums_binding.dart';
+import 'package:solution_ke/presentation/categories_screen/binding/categories_binding.dart';
+import 'package:solution_ke/presentation/categories_screen/categories_screen.dart';
 import 'package:solution_ke/presentation/dashboard_screen/binding/dashboard_binding.dart';
 import 'package:solution_ke/presentation/dashboard_screen/dashboard_screen.dart';
 import 'package:solution_ke/presentation/homepage_screen/binding/homepage_binding.dart';
@@ -20,6 +22,8 @@ import 'package:solution_ke/presentation/playlist_screen/binding/playlist_bindin
 import 'package:solution_ke/presentation/playlist_screen/playlist_screen.dart';
 import 'package:solution_ke/presentation/playlists_screen/binding/playlists_binding.dart';
 import 'package:solution_ke/presentation/playlists_screen/playlists_screen.dart';
+import 'package:solution_ke/presentation/release_screen/binding/release_binding.dart';
+import 'package:solution_ke/presentation/release_screen/release_screen.dart';
 import 'package:solution_ke/presentation/search_screen/binding/search_binding.dart';
 import 'package:solution_ke/presentation/search_screen/search_screen.dart';
 import 'package:solution_ke/presentation/sign_up_screen/sign_up_screen.dart';
@@ -106,6 +110,10 @@ class AppRoutes {
   static String albumsScreen = '/albums_screen';
 
   static String playlistScreen = '/playlist_screen';
+
+  static String releasesScreen = '/releases_screen';
+
+  static String categoriesScreen = '/categories_screen';
 
   static String initialRoute = '/initialRoute';
 
@@ -245,6 +253,16 @@ class AppRoutes {
       ],
     ),
     GetPage(
+      name: categoriesScreen,
+      page: () => CategoriesScreen(),
+      bindings: [
+        CategoriesBinding(),
+      ],
+      middlewares: [
+        AuthenticatedGuard(),
+      ],
+    ),
+    GetPage(
       name: purchaseScreen,
       page: () => PurchaseScreen(),
       bindings: [
@@ -323,6 +341,13 @@ class AppRoutes {
       page: () => OnboardingScreen(),
       bindings: [
         OnboardingBinding(),
+      ],
+    ),
+    GetPage(
+      name: releasesScreen,
+      page: () => ReleaseScreen(),
+      bindings: [
+        ReleaseBinding(),
       ],
     ),
     GetPage(

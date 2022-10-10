@@ -1,9 +1,5 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
-
 import 'package:solution_ke/core/app_export.dart';
-import 'package:solution_ke/core/errors/exceptions.dart';
 import 'package:solution_ke/data/apiClient/api_client.dart';
 import 'package:solution_ke/data/models/playlist/playlist_track_response.dart';
 import 'package:solution_ke/data/models/song/song_response.dart';
@@ -94,6 +90,23 @@ class SongsController extends GetxController {
             "include": [
               {"model": "user", "as": "_addedBy"}
             ],
+            "order": [
+              ["playCount", "DESC"]
+            ],
+            "paginate": 30
+          }
+        };
+
+        this.fetchSongs(
+          request,
+        );
+        break;
+      case 4:
+        var request = {
+          "options": {
+            "query": {
+              "addedBy": {"\$eq": typeId.value}
+            },
             "order": [
               ["playCount", "DESC"]
             ],

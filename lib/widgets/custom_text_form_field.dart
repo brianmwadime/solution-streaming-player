@@ -14,6 +14,7 @@ class CustomTextFormField extends StatelessWidget {
       this.focusNode,
       this.isObscureText = false,
       this.textInputAction = TextInputAction.next,
+      this.keyboardType = TextInputType.name,
       this.maxLines,
       this.hintText,
       this.prefix,
@@ -43,6 +44,8 @@ class CustomTextFormField extends StatelessWidget {
   final bool? isObscureText;
 
   final TextInputAction? textInputAction;
+
+  final TextInputType? keyboardType;
 
   final int? maxLines;
 
@@ -76,6 +79,7 @@ class CustomTextFormField extends StatelessWidget {
         controller: controller,
         focusNode: focusNode,
         style: _setFontStyle(),
+        keyboardType: keyboardType,
         obscureText: isObscureText!,
         textInputAction: textInputAction,
         maxLines: maxLines ?? 1,

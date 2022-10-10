@@ -40,7 +40,7 @@ class SongsScreen extends GetWidget<SongsController> {
                   children: [
                     if (controller.pageType.value == 1)
                       PlaylistHead(
-                        songsList: controller.songs,
+                        songsList: controller.songs.value,
                         offline: false,
                         fromDownloads: false,
                       ),
@@ -76,7 +76,7 @@ class SongsScreen extends GetWidget<SongsController> {
                               style: TextStyle(color: Colors.white),
                             ),
                             subtitle: Text(
-                              '${controller.songs[index].artist?.name ?? 'Unknown'} - ${controller.songs[index].album?.name ?? 'Unknown'}',
+                              '${controller.songs[index].artist?.name ?? 'Unknown'} • ${controller.songs[index].album?.name ?? 'Unknown'}',
                               overflow: TextOverflow.ellipsis,
                               style: AppStyle.txtPoppinsMedium14WhiteA70099,
                             ),
