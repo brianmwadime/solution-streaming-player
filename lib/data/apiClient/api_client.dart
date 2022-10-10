@@ -72,6 +72,31 @@ class ApiClient extends GetConnect {
     }
   }
 
+  Future makePurchaseOrder(
+      {Function(dynamic data)? onSuccess,
+      Function(dynamic error)? onError,
+      Map<String, String> headers = const {},
+      Map requestData = const {}}) async {
+    ProgressDialogUtils.showProgressDialog();
+    try {
+      await isNetworkConnected();
+      Response response = await httpClient.post('$url/device/api/v1/makeOrder',
+          headers: headers, body: requestData);
+      ProgressDialogUtils.hideProgressDialog();
+      if (_isSuccessCall(response)) {
+        onSuccess!(response.body);
+      } else {
+        onError!(
+          response.hasError ? response.body : 'Something Went Wrong!',
+        );
+      }
+    } catch (error, stackTrace) {
+      ProgressDialogUtils.hideProgressDialog();
+      Logger.log(error, stackTrace: stackTrace);
+      onError!(error);
+    }
+  }
+
   Future fetchList(
       {Function(dynamic data)? onSuccess,
       Function(dynamic error)? onError,
@@ -131,7 +156,7 @@ class ApiClient extends GetConnect {
     try {
       await isNetworkConnected();
       Response response = await httpClient.post(
-          '$url/device/api/v1/new_release/list',
+          '$url/device/api/v1/release/list',
           headers: headers,
           body: requestData);
       ProgressDialogUtils.hideProgressDialog();
@@ -390,6 +415,33 @@ class ApiClient extends GetConnect {
     }
   }
 
+  Future updateSongPlayCount(int id,
+      {Function(dynamic data)? onSuccess,
+      Function(dynamic error)? onError,
+      Map<String, String> headers = const {},
+      Map requestData = const {}}) async {
+    ProgressDialogUtils.showProgressDialog();
+    try {
+      await isNetworkConnected();
+      Response response = await httpClient.put(
+          '$url/device/api/v1/song/partial-update/$id',
+          headers: headers,
+          body: requestData);
+      ProgressDialogUtils.hideProgressDialog();
+      if (_isSuccessCall(response)) {
+        onSuccess!(response.body);
+      } else {
+        onError!(
+          response.hasError ? response.body : 'Something Went Wrong!',
+        );
+      }
+    } catch (error, stackTrace) {
+      ProgressDialogUtils.hideProgressDialog();
+      Logger.log(error, stackTrace: stackTrace);
+      onError!(error);
+    }
+  }
+
   Future fetchSongs(
       {Function(dynamic data)? onSuccess,
       Function(dynamic error)? onError,
@@ -400,6 +452,32 @@ class ApiClient extends GetConnect {
     try {
       await isNetworkConnected();
       Response response = await httpClient.post('$url/device/api/v1/song/list',
+          headers: headers, body: requestData);
+      ProgressDialogUtils.hideProgressDialog();
+      if (_isSuccessCall(response)) {
+        onSuccess!(response.body);
+      } else {
+        onError!(
+          response.hasError ? response.body : 'Something Went Wrong!',
+        );
+      }
+    } catch (error, stackTrace) {
+      ProgressDialogUtils.hideProgressDialog();
+      Logger.log(error, stackTrace: stackTrace);
+      onError!(error);
+    }
+  }
+
+  Future fetchArtists(
+      {Function(dynamic data)? onSuccess,
+      Function(dynamic error)? onError,
+      Map<String, String> headers = const {},
+      Map requestData = const {},
+      String? id = ''}) async {
+    ProgressDialogUtils.showProgressDialog();
+    try {
+      await isNetworkConnected();
+      Response response = await httpClient.post('$url/device/api/v1/user/list',
           headers: headers, body: requestData);
       ProgressDialogUtils.hideProgressDialog();
       if (_isSuccessCall(response)) {

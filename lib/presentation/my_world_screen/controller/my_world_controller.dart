@@ -42,6 +42,25 @@ class MyWorldController extends GetxController {
     super.onClose();
   }
 
+  // Future<bool?> refresh() async {
+  //   var playlistRequest = {
+  //     "query": {
+  //       "addedBy": {"\$eq": Get.find<PrefUtils>().getUserId()}
+  //     },
+  //     "options": {
+  //       "include": [
+  //         {"model": "user", "as": "_addedBy"}
+  //       ],
+  //     }
+  //   };
+
+  //   this.fetchPlaylist(
+  //     playlistRequest,
+  //     successCall: () => true,
+  //     errCall: () => false,
+  //   );
+  // }
+
   void fetchPlaylist(Map request,
       {VoidCallback? successCall, VoidCallback? errCall}) async {
     return Get.find<ApiClient>().fetchPlaylists(

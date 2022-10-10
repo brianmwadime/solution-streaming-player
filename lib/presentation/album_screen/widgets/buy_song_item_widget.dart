@@ -27,48 +27,52 @@ class BuySongItemWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 16,
-                  bottom: 7,
+          Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: 16,
+                    bottom: 7,
+                  ),
+                  child: CommonImageView(
+                    color: ColorConstant.gray500,
+                    url: song.artwork,
+                    // svgPath: song.artwork ?? "assets/noImage.svg",
+                    height: 48,
+                    width: 48,
+                  ),
                 ),
-                child: CommonImageView(
-                  color: ColorConstant.gray500,
-                  url: song.artwork,
-                  // svgPath: song.artwork ?? "assets/noImage.svg",
-                  height: 48,
-                  width: 48,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 20,
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text.rich(
-                      TextSpan(text: song.name),
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.left,
-                      style: AppStyle.txtPoppinsMedium14,
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: 20,
+                  ),
+                  child: Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text.rich(
+                          TextSpan(text: song.name),
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.left,
+                          style: AppStyle.txtPoppinsMedium14,
+                        ),
+                        Text.rich(
+                          TextSpan(text: song.artist?.name ?? "N/a"),
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.left,
+                          style: AppStyle.txtPoppinsRegular12Gray500,
+                        ),
+                      ],
                     ),
-                    Text.rich(
-                      TextSpan(text: song.artist?.name ?? "N/a"),
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.left,
-                      style: AppStyle.txtPoppinsRegular12Gray500,
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           CustomButton(
             width: 70,

@@ -20,6 +20,8 @@ class AlbumController extends GetxController {
   void onInit() {
     super.onInit();
     this.album = Get.arguments[NavigationArgs.album];
+    this.albumModelObj.value.album?.value = Get.arguments[NavigationArgs.album];
+    update();
   }
 
   @override

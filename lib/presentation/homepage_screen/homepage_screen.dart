@@ -1,5 +1,7 @@
 import 'package:solution_ke/data/models/album/album_response.dart';
+import 'package:solution_ke/data/models/releases/releases_response.dart';
 import 'package:solution_ke/data/models/song/song_response.dart';
+import 'package:solution_ke/data/models/updateProfile/profile_response.dart';
 import 'package:solution_ke/presentation/player_screen/controller/player_controller.dart';
 import 'package:solution_ke/widgets/common_section_header.dart';
 
@@ -7,11 +9,8 @@ import 'widgets/artist_item_widget.dart';
 import 'widgets/album_item_widget.dart';
 import 'widgets/releases_item_widget.dart';
 import 'widgets/song_item_widget.dart';
-import 'widgets/sound_item_widget.dart';
 import 'widgets/pill_item_item_widget.dart';
 import 'controller/homepage_controller.dart';
-import 'models/artist_item_model.dart';
-import 'models/soundlevel_item_model.dart';
 import 'models/genre_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_ke/core/app_export.dart';
@@ -170,84 +169,85 @@ class HomepageScreen extends StatelessWidget {
                                       child: ListAlbumItemWidget(model),
                                       onTap: () => goToAlbum(model));
                                 }))),
-                        // SectionHeaderWidget(
-                        //     title: "lbl_new_releases".tr, onTapMore: () {}),
-                        // Container(
-                        //     height: 230,
-                        //     width: double.infinity,
-                        //     child: Obx(() => ListView.separated(
-                        //         padding: getPadding(left: 18, top: 22, right: 16),
-                        //         scrollDirection: Axis.horizontal,
-                        //         physics: BouncingScrollPhysics(),
-                        //         itemCount: controller
-                        //             .homepageModelObj.value.releasesList.length,
-                        //         separatorBuilder:
-                        //             (BuildContext context, int index) => SizedBox(
-                        //                   width: 20,
-                        //                 ),
-                        //         itemBuilder: (context, index) {
-                        //           Album model = controller
-                        //               .homepageModelObj.value.releasesList[index];
-                        //           return InkWell(
-                        //             child: NewReleaseItemWidget(model),
-                        //             onTap: () => goToAlbum(model),
-                        //           );
-                        //         }))),
-                        // SectionHeaderWidget(
-                        //   title: "lbl_trending".tr,
-                        //   onTapMore: () {},
-                        // ),
-                        // Container(
-                        //     height: 210,
-                        //     width: double.infinity,
-                        //     child: Obx(() => ListView.separated(
-                        //         padding: EdgeInsets.only(
-                        //             left: 20, top: 20, right: 20),
-                        //         scrollDirection: Axis.horizontal,
-                        //         physics: BouncingScrollPhysics(),
-                        //         itemCount: controller.homepageModelObj.value
-                        //             .albumsItemList.length,
-                        //         separatorBuilder:
-                        //             (BuildContext context, int index) =>
-                        //                 SizedBox(
-                        //                   width: 20,
-                        //                 ),
-                        //         itemBuilder: (context, index) {
-                        //           Album model = controller.homepageModelObj
-                        //               .value.albumsItemList[index];
-                        //           return InkWell(
-                        //             child: ListAlbumItemWidget(model),
-                        //             onTap: () => goToAlbum(model),
-                        //           );
-                        //         }))),
+                        SectionHeaderWidget(
+                            title: "lbl_new_releases".tr,
+                            onTapMore: () {
+                              Get.toNamed(AppRoutes.releasesScreen);
+                            }),
+                        Container(
+                            height: 230,
+                            width: double.infinity,
+                            child: Obx(() => ListView.separated(
+                                padding:
+                                    getPadding(left: 18, top: 22, right: 16),
+                                scrollDirection: Axis.horizontal,
+                                physics: BouncingScrollPhysics(),
+                                itemCount: controller
+                                    .homepageModelObj.value.releasesList.length,
+                                separatorBuilder:
+                                    (BuildContext context, int index) =>
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                itemBuilder: (context, index) {
+                                  Release model = controller.homepageModelObj
+                                      .value.releasesList[index];
+                                  return NewReleaseItemWidget(
+                                    model: model,
+                                  );
+                                }))),
+
                         Divider(
                           color: ColorConstant.whiteA70026,
                           height: 40,
                         ),
-                        // SectionHeaderWidget(
-                        //     title: "msg_creatives_artis".tr, onTapMore: () {}),
-                        // Container(
-                        //     height: 120,
-                        //     width: double.infinity,
-                        //     child: Obx(() => ListView.separated(
-                        //         padding:
-                        //             EdgeInsets.only(left: 20, top: 20, right: 20),
-                        //         scrollDirection: Axis.horizontal,
-                        //         physics: BouncingScrollPhysics(),
-                        //         itemCount: controller
-                        //             .homepageModelObj.value.artistsItemList.length,
-                        //         separatorBuilder: (context, index) => SizedBox(
-                        //               width: 20,
-                        //             ),
-                        //         itemBuilder: (context, index) {
-                        //           ArtistsItemModel model = controller
-                        //               .homepageModelObj
-                        //               .value
-                        //               .artistsItemList[index];
-                        //           return ArtistItemWidget(model);
-                        //         }))),
                         SectionHeaderWidget(
-                            title: "lbl_categories".tr, onTapMore: () {}),
+                            title: "msg_creatives_artis".tr,
+                            hideActions: true,
+                            onTapMore: () {}),
+                        Container(
+                            height: 170,
+                            width: double.infinity,
+                            child: Obx(() => ListView.separated(
+                                padding: EdgeInsets.only(
+                                    left: 20, top: 20, right: 20),
+                                scrollDirection: Axis.horizontal,
+                                physics: BouncingScrollPhysics(),
+                                itemCount: controller.homepageModelObj.value
+                                    .artistsItemList.length,
+                                separatorBuilder: (context, index) => SizedBox(
+                                      width: 20,
+                                    ),
+                                itemBuilder: (context, index) {
+                                  UserProfile model = controller
+                                      .homepageModelObj
+                                      .value
+                                      .artistsItemList[index];
+                                  return GestureDetector(
+                                      onTap: (() {
+                                        Get.toNamed(AppRoutes.songsScreen,
+                                            arguments: {
+                                              NavigationArgs.pageType: 4,
+                                              NavigationArgs.pageTitle:
+                                                  controller
+                                                      .homepageModelObj
+                                                      .value
+                                                      .artistsItemList[index]
+                                                      .name,
+                                              NavigationArgs.typeId: controller
+                                                  .homepageModelObj
+                                                  .value
+                                                  .artistsItemList[index]
+                                                  .id
+                                            });
+                                      }),
+                                      child: ArtistItemWidget(model));
+                                }))),
+                        SectionHeaderWidget(
+                            title: "lbl_categories".tr,
+                            onTapMore: () {
+                              goToCategories();
+                            }),
                         Container(
                             height: 50,
                             width: double.infinity,
@@ -317,6 +317,10 @@ class HomepageScreen extends StatelessWidget {
   goToAlbum(album) async {
     await Get.toNamed(AppRoutes.albumScreen,
         arguments: {NavigationArgs.album: album}, preventDuplicates: false);
+  }
+
+  goToCategories() async {
+    await Get.toNamed(AppRoutes.categoriesScreen);
   }
 
   goToPopularAlbums() async {

@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:audio_manager/audio_manager.dart';
 import 'package:solution_ke/core/utils/player_utils.dart';
+import 'package:solution_ke/data/apiClient/api_client.dart';
 
 import '/core/app_export.dart';
 import 'package:solution_ke/data/models/song/song_response.dart';
@@ -59,6 +62,25 @@ class PlayerController extends GetxController {
     audioManager.play(auto: true);
     update();
   }
+
+  void updateSongPlayCount(int id, Map request,
+      {VoidCallback? successCall, VoidCallback? errCall}) async {
+    return Get.find<ApiClient>().updateSongPlayCount(onSuccess: (resp) {
+      onFetchSuccess(resp);
+      if (successCall != null) {
+        successCall();
+      }
+    }, onError: (err) {
+      onFetchError(err);
+      if (errCall != null) {
+        errCall();
+      }
+    }, requestData: request, id);
+  }
+
+  void onFetchSuccess(var response) {}
+
+  void onFetchError(var error) {}
 
   updateRecentPlaylist(List<AudioInfo> songs) {
     audioManager.stop();
@@ -122,6 +144,11 @@ class PlayerController extends GetxController {
           update();
           break;
         case AudioManagerEvents.ended:
+          if (songs.isNotEmpty) {
+            const data = {"playCount": 1};
+            updateSongPlayCount((songs[curIndex.value].id)!, data);
+          }
+
           audioManager.next();
           break;
         case AudioManagerEvents.volumeChange:

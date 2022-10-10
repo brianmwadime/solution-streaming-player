@@ -48,6 +48,7 @@ class Song {
   String? artwork;
   String? basePrice;
   String? thanksNote;
+  int? playlistId;
   bool? tosAccepted;
 
   Song(
@@ -66,6 +67,7 @@ class Song {
       this.album,
       this.updatedBy,
       this.fileType,
+      this.playlistId,
       this.artwork,
       this.basePrice,
       this.thanksNote,
@@ -82,6 +84,7 @@ class Song {
     isActive = json['isActive'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
+    playlistId = json['playlistId'];
     addedBy = json['addedBy'];
     artist = json['_addedBy'] != null
         ? UserProfile.fromJson(json['_addedBy'])
@@ -129,6 +132,10 @@ class Song {
     }
     if (this.addedBy != null) {
       data['addedBy'] = this.addedBy;
+    }
+
+    if (this.playlistId != null) {
+      data['playlistId'] = this.playlistId;
     }
 
     if (this.artist != null) {

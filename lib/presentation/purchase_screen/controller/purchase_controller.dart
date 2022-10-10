@@ -1,3 +1,4 @@
+import 'package:solution_ke/data/apiClient/api_client.dart';
 import 'package:solution_ke/data/models/album/album_response.dart';
 import 'package:solution_ke/data/models/song/song_response.dart';
 
@@ -14,7 +15,7 @@ class PurchaseController extends GetxController {
 
   Rx<PurchaseModel> purchaseModelObj = PurchaseModel().obs;
 
-  RxString radioGroup = "".obs;
+  RxString radioGroup = "2".obs;
 
   @override
   void onInit() {
@@ -38,5 +39,29 @@ class PurchaseController extends GetxController {
   void onClose() {
     super.onClose();
     phonenumberController.dispose();
+  }
+
+  Future<void> makePurchaseOrder(dynamic data,
+      {VoidCallback? successCall, VoidCallback? errCall}) async {
+    return Get.find<ApiClient>().makePurchaseOrder(
+        onSuccess: (resp) {
+          onSuccess(resp);
+          if (successCall != null) {
+            successCall();
+          }
+        },
+        onError: (err) {
+          onError(err);
+          if (errCall != null) {
+            errCall();
+          }
+        },
+        requestData: data);
+  }
+
+  onError(error) {}
+
+  onSuccess(response) {
+    print(response);
   }
 }

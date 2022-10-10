@@ -66,34 +66,31 @@ class ListSongItemWidget extends StatelessWidget {
                   textAlign: TextAlign.left,
                   style: AppStyle.txtPoppinsMedium14,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    CommonImageView(
-                      svgPath: ImageConstant.imgFile,
-                      height: 15,
-                      width: 16,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 5,
+                if (song.artist != null)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      CommonImageView(
+                        svgPath: ImageConstant.imgFile,
+                        height: 15,
+                        width: 16,
                       ),
-                      child: Text.rich(
-                        TextSpan(text: song.artist?.name.toString(), children: [
-                          // TextSpan(text: " Tracks"),
-                          // TextSpan(text: " - "),
-                          // TextSpan(
-                          //     text: song.year.toString())
-                        ]),
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.left,
-                        style: AppStyle.txtPoppinsMedium12Gray500,
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 5,
+                        ),
+                        child: Text.rich(
+                          TextSpan(
+                              text: song.artist?.name.toString(), children: []),
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.left,
+                          style: AppStyle.txtPoppinsMedium12Gray500,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
               ],
             ),
           ),

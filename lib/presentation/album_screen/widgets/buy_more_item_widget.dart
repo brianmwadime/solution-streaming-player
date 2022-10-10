@@ -27,35 +27,33 @@ class AlbumBuyMoreItemWidget extends StatelessWidget {
           height: 150,
           width: 150,
         ),
-        Expanded(
-          child: Container(
-            width: 150,
-            padding: EdgeInsets.only(
-              top: 7,
-              bottom: 8,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Expanded(
-                  child: Text.rich(
-                    TextSpan(text: album.name),
-                    overflow: TextOverflow.ellipsis,
-                    style: AppStyle.txtPoppinsMedium14,
-                  ),
+        Container(
+          width: 150,
+          padding: EdgeInsets.only(
+            top: 7,
+            bottom: 8,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: Text.rich(
+                  TextSpan(text: album.name),
+                  overflow: TextOverflow.ellipsis,
+                  style: AppStyle.txtPoppinsMedium14,
                 ),
-                CustomButton(
-                  width: 40,
-                  text: "lbl_buy".tr,
-                  shape: ButtonShape.RoundedBorder10,
-                  padding: ButtonPadding.PaddingAll6,
-                  fontStyle: ButtonFontStyle.PoppinsMedium13,
-                  onTap: onTapBuy,
-                ),
-              ],
-            ),
+              ),
+              CustomButton(
+                width: 40,
+                text: "lbl_buy".tr,
+                shape: ButtonShape.RoundedBorder10,
+                padding: ButtonPadding.PaddingAll6,
+                fontStyle: ButtonFontStyle.PoppinsMedium13,
+                onTap: onTapBuy,
+              ),
+            ],
           ),
         ),
       ],

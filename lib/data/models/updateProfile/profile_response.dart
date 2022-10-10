@@ -31,6 +31,7 @@ class UserProfile {
   String? username;
   String? email;
   String? name;
+  String? avatar;
   bool? isActive;
   String? createdAt;
   String? updatedAt;
@@ -48,6 +49,7 @@ class UserProfile {
       this.email,
       this.name,
       this.isActive,
+      this.avatar,
       this.createdAt,
       this.updatedAt,
       this.addedBy,
@@ -67,6 +69,7 @@ class UserProfile {
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     addedBy = json['addedBy'];
+    avatar = json['avatar'];
     updatedBy = json['updatedBy'];
     nationalId = json['nationalId'];
     kraPin = json['kraPin'];
@@ -82,6 +85,9 @@ class UserProfile {
     }
     if (this.username != null) {
       data['username'] = this.username;
+    }
+    if (this.avatar != null) {
+      data['avatar'] = this.avatar;
     }
     if (this.email != null) {
       data['email'] = this.email;

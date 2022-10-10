@@ -1,13 +1,14 @@
+import 'package:solution_ke/data/models/updateProfile/profile_response.dart';
+
 import '../controller/homepage_controller.dart';
-import '../models/artist_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_ke/core/app_export.dart';
 
 // ignore: must_be_immutable
 class ArtistItemWidget extends StatelessWidget {
-  ArtistItemWidget(this.artistsItemModelObj);
+  ArtistItemWidget(this.user);
 
-  ArtistsItemModel artistsItemModelObj;
+  UserProfile user;
 
   var controller = Get.find<HomepageController>();
 
@@ -21,22 +22,21 @@ class ArtistItemWidget extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: CommonImageView(
-            imagePath: ImageConstant.imgAvatar49X66,
-            height: 50,
-            width: getHorizontalSize(
-              66.00,
-            ),
+            url: user.avatar,
+            imagePath: "assets/images/artist.png",
+            height: 100,
+            width: 100,
           ),
         ),
         Padding(
           padding: EdgeInsets.only(
             top: 10,
           ),
-          child: Text(
-            "lbl_njugush".tr,
+          child: Text.rich(
+            TextSpan(text: user.name),
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
-            style: AppStyle.txtPoppinsSemiBold7,
+            style: AppStyle.txtPoppinsSemiBold15,
           ),
         ),
       ],

@@ -333,7 +333,7 @@ class LoginScreen extends GetWidget<LoginController> {
   }
 
   void _onLoginUserSuccess() {
-    Get.offNamed(AppRoutes.otpVerificationScreen, arguments: {
+    Get.toNamed(AppRoutes.otpVerificationScreen, arguments: {
       NavigationArgs.username: controller.phoneNumberFieldController.text
     });
   }

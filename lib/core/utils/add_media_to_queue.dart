@@ -2,7 +2,6 @@ import 'package:audio_manager/audio_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:solution_ke/core/utils/list_utils.dart';
-import 'package:solution_ke/presentation/player_screen/controller/player_controller.dart';
 import 'package:solution_ke/widgets/common_snackbar.dart';
 
 void addToNowPlaying({

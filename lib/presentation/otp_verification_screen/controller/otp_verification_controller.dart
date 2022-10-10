@@ -30,6 +30,8 @@ class OtpVerificationController extends GetxController with CodeAutoFill {
 
   @override
   void onClose() {
+    unregisterListener();
+    cancel();
     super.onClose();
   }
 

@@ -65,6 +65,7 @@ class OtpVerificationScreen extends GetWidget<OtpVerificationController> {
                             child: Container(
                                 width: 260,
                                 child: Obx(() => PinCodeTextField(
+                                    autoFocus: true,
                                     appContext: context,
                                     controller: controller.otpController.value,
                                     length: 4,
