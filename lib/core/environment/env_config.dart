@@ -1,5 +1,5 @@
 import 'base_env_config.dart';
-import 'solutionapiv1environment_env_config.dart';
+import 'production_env_config.dart';
 
 enum Environment { solutionApiV1Environment }
 
@@ -13,9 +13,9 @@ class EnvConfig {
   _getConfig([Environment? environment]) {
     switch (environment) {
       case Environment.solutionApiV1Environment:
-        return Solutionapiv1environmentEnvConfig();
+        return ProductionEnvConfig();
       default:
-        return Solutionapiv1environmentEnvConfig();
+        return ProductionEnvConfig();
     }
   }
 }
