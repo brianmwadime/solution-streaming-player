@@ -21,6 +21,7 @@ class CustomTextFormField extends StatelessWidget {
       this.prefixConstraints,
       this.suffix,
       this.suffixConstraints,
+      this.autofocus = false,
       this.validator});
 
   final TextFormFieldShape? shape;
@@ -59,6 +60,8 @@ class CustomTextFormField extends StatelessWidget {
 
   final BoxConstraints? suffixConstraints;
 
+  final bool autofocus;
+
   final FormFieldValidator<String>? validator;
 
   @override
@@ -76,6 +79,7 @@ class CustomTextFormField extends StatelessWidget {
       width: width ?? 0,
       margin: margin,
       child: TextFormField(
+        autofocus: autofocus,
         controller: controller,
         focusNode: focusNode,
         style: _setFontStyle(),

@@ -4,10 +4,9 @@ import 'package:solution_ke/core/app_export.dart';
 import 'package:solution_ke/core/utils/validation_functions.dart';
 import 'package:solution_ke/widgets/custom_button.dart';
 import 'package:solution_ke/widgets/custom_checkbox.dart';
-import 'package:solution_ke/widgets/custom_floating_edit_text.dart';
 import 'package:solution_ke/widgets/custom_icon_button.dart';
 import 'package:solution_ke/widgets/custom_text_form_field.dart';
-import 'package:solution_ke/data/models/register/post_register_req.dart';
+import 'package:solution_ke/data/models/register/post_register_request.dart';
 import 'package:solution_ke/domain/googleauth/google_auth_helper.dart';
 import 'package:solution_ke/domain/facebookauth/facebook_auth_helper.dart';
 
@@ -79,6 +78,7 @@ class SignUpScreen extends GetWidget<SignUpController> {
                                       children: [
                                         CustomTextFormField(
                                             width: double.infinity,
+                                            autofocus: true,
                                             focusNode: FocusNode(),
                                             controller:
                                                 controller.nameController,
@@ -103,20 +103,6 @@ class SignUpScreen extends GetWidget<SignUpController> {
                                               }
                                               return null;
                                             }),
-                                        // CustomFloatingEditText(
-                                        //     width: double.infinity,
-                                        //     focusNode: FocusNode(),
-                                        //     controller: controller
-                                        //         .guardianAngelController,
-                                        //     labelText: "lbl_name".tr,
-                                        //     hintText:
-                                        //         "lbl_guardian_angel".tr,
-                                        //     validator: (value) {
-                                        //       if (!isText(value)) {
-                                        //         return "Please enter valid text";
-                                        //       }
-                                        //       return null;
-                                        //     }),
                                         CustomTextFormField(
                                             width: double.infinity,
                                             focusNode: FocusNode(),
@@ -339,12 +325,13 @@ class SignUpScreen extends GetWidget<SignUpController> {
   }
 
   void onTapSignup() {
-    PostRegisterReq postRegisterReq = PostRegisterReq(
+    PostRegisterRequest postRegisterReq = PostRegisterRequest(
         mobileNo: controller.phoneController.text,
         username: controller.usernameController.text,
         password: controller.passwordController.text,
         name: controller.nameController.text,
-        email: controller.emailController.text);
+        email: controller.emailController.text,
+        userType: 1);
     controller.register(
       postRegisterReq.toJson(),
       successCall: _onRegisterUserSuccess,
@@ -353,12 +340,12 @@ class SignUpScreen extends GetWidget<SignUpController> {
   }
 
   void _onRegisterUserSuccess() {
-    Get.find<PrefUtils>().setUserID(controller.postRegisterResp.data!.id!);
+    Get.find<PrefUtils>().setUserID(controller.userProfileResponse.data!.id!);
     Get.toNamed(AppRoutes.loginScreen);
   }
 
   void _onRegisterUserError() {
-    Get.snackbar('', controller.postRegisterResp.message!.toString());
+    Get.snackbar('', controller.userProfileResponse.message!.toString());
   }
 
   onTapImgGoogle() async {

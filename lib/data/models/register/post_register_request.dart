@@ -1,26 +1,29 @@
-class PostRegisterReq {
+class PostRegisterRequest {
   String? username;
   String? password;
   String? email;
   String? name;
   String? nationalId;
   String? kraPin;
+  int userType = 1;
   String? mobileNo;
 
-  PostRegisterReq(
+  PostRegisterRequest(
       {this.username,
       this.password,
+      required this.userType,
       this.email,
       this.name,
       this.nationalId,
       this.kraPin,
       this.mobileNo});
 
-  PostRegisterReq.fromJson(Map<String, dynamic> json) {
+  PostRegisterRequest.fromJson(Map<String, dynamic> json) {
     username = json['username'];
     password = json['password'];
     email = json['email'];
     name = json['name'];
+    userType = json['userType'];
     nationalId = json['nationalId'];
     kraPin = json['kraPin'];
     mobileNo = json['mobileNo'];
@@ -37,6 +40,7 @@ class PostRegisterReq {
     if (this.email != null) {
       data['email'] = this.email;
     }
+    data['userType'] = this.userType;
     if (this.name != null) {
       data['name'] = this.name;
     }
