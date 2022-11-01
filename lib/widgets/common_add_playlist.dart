@@ -1,8 +1,6 @@
-import 'package:audio_manager/audio_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_ke/core/app_export.dart';
 import 'package:solution_ke/presentation/playlist_screen/controller/playlist_controller.dart';
-import 'package:solution_ke/widgets/common_snackbar.dart';
 import 'package:solution_ke/widgets/common_text_input_dialog.dart';
 import 'package:solution_ke/widgets/custom_gradient_containers.dart';
 

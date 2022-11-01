@@ -26,7 +26,7 @@ void main() async {
   await openHiveBox("cache", limit: true);
 
   if (Platform.isAndroid) {
-    setOptimalDisplayMode();
+    // setOptimalDisplayMode();
   }
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])

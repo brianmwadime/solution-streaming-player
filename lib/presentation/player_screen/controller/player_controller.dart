@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:audio_manager/audio_manager.dart';
 import 'package:solution_ke/core/utils/player_utils.dart';
 import 'package:solution_ke/data/apiClient/api_client.dart';
+import 'package:solution_ke/extensions/audio_info_extensions.dart';
 
 import '/core/app_export.dart';
 import 'package:solution_ke/data/models/song/song_response.dart';
@@ -26,12 +27,14 @@ class PlayerController extends GetxController {
 
     if (Get.arguments != null) {
       songs.value = Get.arguments[NavigationArgs.songs];
-      audioManager.audioList = songs
-          .map((e) => AudioInfo(e.filePath!,
-              title: e.name!,
-              desc: e.name!,
-              coverUrl: e.artwork ?? "assets/images/cover.jpg"))
-          .toList();
+      audioManager.audioList = songs.map((e) {
+        var ai = AudioInfo(e.filePath!,
+            title: e.name!,
+            desc: e.name!,
+            coverUrl: e.artwork ?? "assets/images/cover.jpg");
+        ai.setId = e.id!;
+        return ai;
+      }).toList();
     }
   }
 
@@ -49,14 +52,18 @@ class PlayerController extends GetxController {
   }
 
   updatePlaylist(List<Song> songs) {
-    this.songs.value = songs;
+    // this.songs.value = songs;
     audioManager.stop();
-    audioManager.audioList = songs
-        .map((e) => AudioInfo(e.filePath!,
-            title: e.name!,
-            desc: e.name!,
-            coverUrl: e.artwork ?? "assets/images/cover.jpg"))
-        .toList();
+    audioManager.audioList = songs.map((e) {
+      var ai = AudioInfo(e.filePath!,
+          title: e.name!,
+          desc: e.name!,
+          coverUrl: e.artwork ?? "assets/images/cover.jpg");
+
+      ai.setId = e.id!;
+
+      return ai;
+    }).toList();
 
     audioManager.intercepter = true;
     audioManager.play(auto: true);
@@ -168,8 +175,7 @@ class PlayerController extends GetxController {
   }
 
   void setPlayMode() {
-    audioManager.nextMode();
-    this.playMode.value = audioManager.playMode;
+    this.playMode.value = audioManager.nextMode();
     update();
   }
 }

@@ -1,3 +1,4 @@
+import 'package:solution_ke/extensions/audio_info_extensions.dart';
 import 'package:solution_ke/widgets/common_add_playlist.dart';
 import 'package:solution_ke/widgets/common_music_player.dart';
 
@@ -94,10 +95,10 @@ class PlayerScreen extends GetWidget<PlayerController> {
                               onTap: () {
                                 if (controller.audioManager.info == null)
                                   return;
-                                var index = controller.audioManager.audioList
-                                    .indexOf(controller.audioManager.info!);
-                                AddToPlaylist().addToPlaylist(
-                                    context, controller.songs[index].toJson());
+                                // var index = controller.audioManager.audioList
+                                //     .indexOf(controller.audioManager.info!);
+                                AddToPlaylist().addToPlaylist(context,
+                                    controller.audioManager.info?.toJson());
                               })
                         ])),
               ],
@@ -112,3 +113,51 @@ class PlayerScreen extends GetWidget<PlayerController> {
     Get.back();
   }
 }
+
+// class MediaState {
+//   final MediaItem? mediaItem;
+//   final Duration position;
+
+//   MediaState(this.mediaItem, this.position);
+// }
+
+// class PositionData {
+//   final Duration position;
+//   final Duration bufferedPosition;
+//   final Duration duration;
+
+//   PositionData(this.position, this.bufferedPosition, this.duration);
+// }
+
+// class QueueState {
+//   static const QueueState empty =
+//       QueueState([], 0, [], AudioServiceRepeatMode.none);
+
+//   final List<MediaItem> queue;
+//   final int? queueIndex;
+//   final List<int>? shuffleIndices;
+//   final AudioServiceRepeatMode repeatMode;
+
+//   const QueueState(
+//     this.queue,
+//     this.queueIndex,
+//     this.shuffleIndices,
+//     this.repeatMode,
+//   );
+
+//   bool get hasPrevious =>
+//       repeatMode != AudioServiceRepeatMode.none || (queueIndex ?? 0) > 0;
+//   bool get hasNext =>
+//       repeatMode != AudioServiceRepeatMode.none ||
+//       (queueIndex ?? 0) + 1 < queue.length;
+
+//   List<int> get indices =>
+//       shuffleIndices ?? List.generate(queue.length, (i) => i);
+// }
+
+// abstract class AudioPlayerHandler implements AudioHandler {
+//   Stream<QueueState> get queueState;
+//   Future<void> moveQueueItem(int currentIndex, int newIndex);
+
+//   Future<void> setVolume(double volume);
+// }

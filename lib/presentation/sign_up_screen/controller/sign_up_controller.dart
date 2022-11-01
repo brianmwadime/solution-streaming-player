@@ -1,7 +1,6 @@
 import 'package:solution_ke/data/models/updateProfile/profile_response.dart';
 
 import '/core/app_export.dart';
-import 'package:solution_ke/presentation/sign_up_screen/models/sign_up_model.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_ke/data/apiClient/api_client.dart';
 
@@ -15,8 +14,6 @@ class SignUpController extends GetxController {
   TextEditingController emailController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
-
-  Rx<SignUpModel> signUpModelObj = SignUpModel().obs;
 
   RxBool tos = false.obs;
 
