@@ -74,7 +74,3 @@ The application structure looks like this:
   https://pub.dev/packages/shared_preferences
 - cached_network_image - For storing internet image into cache
   https://pub.dev/packages/cached_network_image
-    
-### Support
-
-If you have problems or questions go to our Discord channel, we will then try to help you as quickly as possible: mailto://brian.mwadime@gmail.com
