@@ -17,23 +17,18 @@ class BuySongItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 10,
-        right: 10,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Row(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Expanded(
+          child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                  left: 16,
                   bottom: 7,
                 ),
                 child: CommonImageView(
@@ -44,12 +39,12 @@ class BuySongItemWidget extends StatelessWidget {
                   width: 48,
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 20,
-                ),
+              SizedBox(
+                width: 20,
+              ),
+              Expanded(
                 child: Column(
-                  mainAxisSize: MainAxisSize.max,
+                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -70,16 +65,16 @@ class BuySongItemWidget extends StatelessWidget {
               ),
             ],
           ),
-          CustomButton(
-            width: 70,
-            text: "lbl_buy".tr,
-            shape: ButtonShape.RoundedBorder10,
-            padding: ButtonPadding.PaddingAll6,
-            fontStyle: ButtonFontStyle.PoppinsMedium13,
-            onTap: onTapBtnBuy,
-          ),
-        ],
-      ),
+        ),
+        CustomButton(
+          width: 70,
+          text: "lbl_buy".tr,
+          shape: ButtonShape.RoundedBorder10,
+          padding: ButtonPadding.PaddingAll6,
+          fontStyle: ButtonFontStyle.PoppinsMedium13,
+          onTap: onTapBtnBuy,
+        ),
+      ],
     );
   }
 }

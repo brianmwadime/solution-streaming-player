@@ -1,7 +1,10 @@
 import 'package:solution_ke/data/apiClient/api_client.dart';
 import 'package:solution_ke/data/models/album/albums_response.dart';
 import 'package:solution_ke/data/models/genres/genre_list_response.dart';
-import 'package:solution_ke/presentation/homepage_screen/models/album_item_model.dart';
+import 'package:solution_ke/data/models/releases/releases_response.dart';
+import 'package:solution_ke/data/models/song/songs_response.dart';
+import 'package:solution_ke/data/models/updateProfile/artists_response.dart';
+import 'package:solution_ke/data/models/updateProfile/profile_response.dart';
 import 'package:solution_ke/presentation/homepage_screen/models/genre_item_model.dart';
 
 import '/core/app_export.dart';
@@ -28,9 +31,12 @@ class HomepageController extends GetxController {
         "include": [
           {"model": "user", "as": "_addedBy"}
         ],
+        "order": [
+          ["playCount", "DESC"]
+        ],
         "select": [],
         // "page": 1,
-        // "paginate": 2
+        "paginate": 10
       }
     };
 
@@ -39,12 +45,122 @@ class HomepageController extends GetxController {
     fetchCategories({},
         successCall: _onOnCategoriesReadySuccess,
         errCall: _onCategoriesReadyError);
+
+    Map songsRequest = {
+      "options": {
+        "include": [
+          {"model": "user", "as": "_addedBy"}
+        ],
+        "order": [
+          ["playCount", "DESC"]
+        ],
+        "paginate": 10
+      }
+    };
+
+    this.fetchSongs(songsRequest, errCall: _onOnReadyError);
+
+    Map newRequest = {
+      "options": {
+        "include": [
+          {"model": "album", "as": "_albumId"},
+          {"model": "song", "as": "_songId"}
+        ],
+        "order": [
+          ["id", "DESC"]
+        ],
+        "paginate": 10
+      }
+    };
+
+    this.fetchNewReleases(newRequest, errCall: _onOnReadyError);
+
+    Map userRequest = {
+      "query": {
+        "userType": {"\$eq": "3"}
+      },
+      "options": {"paginate": 10}
+    };
+
+    this.fetchArtists(userRequest, errCall: _onOnReadyError);
   }
 
   @override
   void onClose() {
     super.onClose();
     searchBarSearController.dispose();
+  }
+
+  void fetchSongs(Map req,
+      {VoidCallback? successCall, VoidCallback? errCall}) async {
+    return Get.find<ApiClient>().fetchSongs(
+        onSuccess: (resp) {
+          onFetchSongsSuccess(resp);
+          if (successCall != null) {
+            successCall();
+          }
+        },
+        onError: (err) {
+          onFetchAlbumsError(err);
+          if (errCall != null) {
+            errCall();
+          }
+        },
+        requestData: req);
+  }
+
+  void fetchArtists(Map req,
+      {VoidCallback? successCall, VoidCallback? errCall}) async {
+    return Get.find<ApiClient>().fetchArtists(
+        onSuccess: (resp) {
+          onFetchArtistsSuccess(resp);
+          if (successCall != null) {
+            successCall();
+          }
+        },
+        onError: (err) {
+          onFetchAlbumsError(err);
+          if (errCall != null) {
+            errCall();
+          }
+        },
+        requestData: req);
+  }
+
+  void onFetchArtistsSuccess(var response) {
+    homepageModelObj.value.artistsItemList.value =
+        ArtistsResponse.fromJson(response).data?.data ?? [];
+    update();
+  }
+
+  void fetchNewReleases(Map req,
+      {VoidCallback? successCall, VoidCallback? errCall}) async {
+    return Get.find<ApiClient>().fetchReleases(
+        onSuccess: (resp) {
+          onFetchReleasesSuccess(resp);
+          if (successCall != null) {
+            successCall();
+          }
+        },
+        onError: (err) {
+          onFetchAlbumsError(err);
+          if (errCall != null) {
+            errCall();
+          }
+        },
+        requestData: req);
+  }
+
+  void onFetchSongsSuccess(var response) {
+    homepageModelObj.value.trendingSongs.value =
+        SongsResponse.fromJson(response).data?.data ?? [];
+    update();
+  }
+
+  void onFetchReleasesSuccess(var response) {
+    homepageModelObj.value.releasesList.value =
+        ReleasesResponse.fromJson(response).data?.data ?? [];
+    update();
   }
 
   void fetchCategories(Map req,

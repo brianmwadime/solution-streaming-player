@@ -31,11 +31,12 @@ class Data {
   String? username;
   String? email;
   String? name;
+  String? avatar;
   bool? isActive;
   String? createdAt;
   String? updatedAt;
-  Null? addedBy;
-  Null? updatedBy;
+  dynamic addedBy;
+  dynamic updatedBy;
   String? nationalId;
   String? kraPin;
   int? userType;
@@ -48,6 +49,7 @@ class Data {
       this.username,
       this.email,
       this.name,
+      this.avatar,
       this.isActive,
       this.createdAt,
       this.updatedAt,
@@ -65,6 +67,7 @@ class Data {
     username = json['username'];
     email = json['email'];
     name = json['name'];
+    avatar = json['avatar'];
     isActive = json['isActive'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
@@ -85,6 +88,9 @@ class Data {
     }
     if (this.username != null) {
       data['username'] = this.username;
+    }
+    if (this.avatar != null) {
+      data['avatar'] = this.avatar;
     }
     if (this.email != null) {
       data['email'] = this.email;

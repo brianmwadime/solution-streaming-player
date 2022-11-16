@@ -1,4 +1,8 @@
+import 'package:get/get.dart';
+import 'package:solution_ke/data/models/album/album_response.dart';
 import 'package:solution_ke/data/models/updateProfile/profile_response.dart';
+
+import '../../apiClient/api_client.dart';
 
 class SongResponse {
   String? status;
@@ -41,11 +45,13 @@ class Song {
   String? updatedAt;
   int? addedBy;
   UserProfile? artist;
+  Album? album;
   int? updatedBy;
   int? fileType;
   String? artwork;
   String? basePrice;
   String? thanksNote;
+  int? playlistId;
   bool? tosAccepted;
 
   Song(
@@ -61,8 +67,10 @@ class Song {
       this.updatedAt,
       this.addedBy,
       this.artist,
+      this.album,
       this.updatedBy,
       this.fileType,
+      this.playlistId,
       this.artwork,
       this.basePrice,
       this.thanksNote,
@@ -71,7 +79,9 @@ class Song {
   Song.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    filePath = json['filePath'];
+    filePath = json['filePath'] != null
+        ? Get.find<ApiClient>().url + json['filePath']
+        : null;
     trackLength = json['trackLength'];
     categoryId = json['categoryId'];
     albumId = json['albumId'];
@@ -79,13 +89,17 @@ class Song {
     isActive = json['isActive'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
+    playlistId = json['playlistId'];
     addedBy = json['addedBy'];
     artist = json['_addedBy'] != null
         ? UserProfile.fromJson(json['_addedBy'])
         : null;
+    album = json['_albumId'] != null ? Album.fromJson(json['_albumId']) : null;
     updatedBy = json['updatedBy'];
     fileType = json['fileType'];
-    artwork = json['artwork'];
+    artwork = json['artwork'] != null
+        ? Get.find<ApiClient>().url + json['artwork']
+        : null;
     basePrice = json['basePrice'];
     thanksNote = json['thanksNote'];
     tosAccepted = json['tosAccepted'];
@@ -127,8 +141,16 @@ class Song {
       data['addedBy'] = this.addedBy;
     }
 
+    if (this.playlistId != null) {
+      data['playlistId'] = this.playlistId;
+    }
+
     if (this.artist != null) {
       data['artist'] = this.artist?.toJson();
+    }
+
+    if (this.album != null) {
+      data['album'] = this.album?.toJson();
     }
 
     if (this.updatedBy != null) {

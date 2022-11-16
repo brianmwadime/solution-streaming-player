@@ -61,13 +61,13 @@ class GenreData {
 class Genre {
   int? id;
   String? name;
-  Null? parentId;
+  int? parentId;
   String? description;
   bool? isActive;
   String? createdAt;
   String? updatedAt;
   int? addedBy;
-  Null? updatedBy;
+  int? updatedBy;
   bool? isDeleted;
 
   Genre(

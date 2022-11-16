@@ -1,15 +1,13 @@
-import '../controller/homepage_controller.dart';
-import '../models/artist_item_model.dart';
+import 'package:solution_ke/data/models/updateProfile/profile_response.dart';
+
 import 'package:flutter/material.dart';
 import 'package:solution_ke/core/app_export.dart';
 
 // ignore: must_be_immutable
 class ArtistItemWidget extends StatelessWidget {
-  ArtistItemWidget(this.artistsItemModelObj);
+  ArtistItemWidget(this.user);
 
-  ArtistsItemModel artistsItemModelObj;
-
-  var controller = Get.find<HomepageController>();
+  UserProfile user;
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +16,15 @@ class ArtistItemWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: CommonImageView(
-            imagePath: ImageConstant.imgAvatar49X66,
-            height: 50,
-            width: getHorizontalSize(
-              66.00,
+        Card(
+          shape: CircleBorder(),
+          clipBehavior: Clip.antiAlias,
+          child: SizedBox(
+            height: 100,
+            width: 100,
+            child: CommonImageView(
+              url: user.avatar,
+              imagePath: "assets/images/artist.png",
             ),
           ),
         ),
@@ -32,11 +32,11 @@ class ArtistItemWidget extends StatelessWidget {
           padding: EdgeInsets.only(
             top: 10,
           ),
-          child: Text(
-            "lbl_njugush".tr,
+          child: Text.rich(
+            TextSpan(text: user.name),
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
-            style: AppStyle.txtPoppinsSemiBold7,
+            style: AppStyle.txtPoppinsSemiBold15,
           ),
         ),
       ],

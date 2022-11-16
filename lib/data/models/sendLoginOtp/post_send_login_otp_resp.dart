@@ -1,7 +1,7 @@
 class PostSendLoginOtpResp {
   String? status;
   String? message;
-  Null? data;
+  dynamic data;
 
   PostSendLoginOtpResp({this.status, this.message, this.data});
 

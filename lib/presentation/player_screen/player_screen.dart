@@ -1,4 +1,5 @@
-import 'package:audio_manager/audio_manager.dart';
+import 'package:solution_ke/extensions/audio_info_extensions.dart';
+import 'package:solution_ke/widgets/common_add_playlist.dart';
 import 'package:solution_ke/widgets/common_music_player.dart';
 
 import 'controller/player_controller.dart';
@@ -26,7 +27,7 @@ class PlayerScreen extends GetWidget<PlayerController> {
         child: SafeArea(
             child: Scaffold(
           resizeToAvoidBottomInset: false,
-          // extendBodyBehindAppBar: true,
+          extendBodyBehindAppBar: false,
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.expand_more_rounded),
@@ -54,9 +55,6 @@ class PlayerScreen extends GetWidget<PlayerController> {
           ),
           backgroundColor: Colors.transparent,
           body: Container(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).padding.top +
-                      MediaQuery.of(context).viewPadding.top),
               width: double.infinity,
               child: SingleChildScrollView(
                   child: Column(
@@ -64,19 +62,20 @@ class PlayerScreen extends GetWidget<PlayerController> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [MusicPlayerWidget()]))),
-          bottomNavigationBar: Container(
-            height: 70,
+          bottomNavigationBar: SizedBox(
+            height: 64,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                     height: 1,
                     width: double.infinity,
-                    margin: EdgeInsets.only(bottom: 10),
                     decoration:
                         BoxDecoration(color: ColorConstant.whiteA70026)),
                 Padding(
                     padding:
-                        EdgeInsets.only(left: 25, right: 25, bottom: 4, top: 4),
+                        EdgeInsets.only(left: 25, right: 25, bottom: 8, top: 8),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -92,7 +91,15 @@ class PlayerScreen extends GetWidget<PlayerController> {
                               variant: ButtonVariant.FillWhiteA7000f,
                               shape: ButtonShape.RoundedBorder22,
                               padding: ButtonPadding.PaddingAll11,
-                              fontStyle: ButtonFontStyle.PoppinsMedium12)
+                              fontStyle: ButtonFontStyle.PoppinsMedium12,
+                              onTap: () {
+                                if (controller.audioManager.info == null)
+                                  return;
+                                // var index = controller.audioManager.audioList
+                                //     .indexOf(controller.audioManager.info!);
+                                AddToPlaylist().addToPlaylist(context,
+                                    controller.audioManager.info?.toJson());
+                              })
                         ])),
               ],
             ),
@@ -106,3 +113,51 @@ class PlayerScreen extends GetWidget<PlayerController> {
     Get.back();
   }
 }
+
+// class MediaState {
+//   final MediaItem? mediaItem;
+//   final Duration position;
+
+//   MediaState(this.mediaItem, this.position);
+// }
+
+// class PositionData {
+//   final Duration position;
+//   final Duration bufferedPosition;
+//   final Duration duration;
+
+//   PositionData(this.position, this.bufferedPosition, this.duration);
+// }
+
+// class QueueState {
+//   static const QueueState empty =
+//       QueueState([], 0, [], AudioServiceRepeatMode.none);
+
+//   final List<MediaItem> queue;
+//   final int? queueIndex;
+//   final List<int>? shuffleIndices;
+//   final AudioServiceRepeatMode repeatMode;
+
+//   const QueueState(
+//     this.queue,
+//     this.queueIndex,
+//     this.shuffleIndices,
+//     this.repeatMode,
+//   );
+
+//   bool get hasPrevious =>
+//       repeatMode != AudioServiceRepeatMode.none || (queueIndex ?? 0) > 0;
+//   bool get hasNext =>
+//       repeatMode != AudioServiceRepeatMode.none ||
+//       (queueIndex ?? 0) + 1 < queue.length;
+
+//   List<int> get indices =>
+//       shuffleIndices ?? List.generate(queue.length, (i) => i);
+// }
+
+// abstract class AudioPlayerHandler implements AudioHandler {
+//   Stream<QueueState> get queueState;
+//   Future<void> moveQueueItem(int currentIndex, int newIndex);
+
+//   Future<void> setVolume(double volume);
+// }

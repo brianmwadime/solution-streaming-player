@@ -1,7 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 // For checking internet connectivity
-abstract class NetworkInfoI {
+abstract class NetworkInfoInterface {
   Future<bool> isConnected();
 
   Future<ConnectivityResult> get connectivityResult;
@@ -9,7 +9,7 @@ abstract class NetworkInfoI {
   Stream<ConnectivityResult> get onConnectivityChanged;
 }
 
-class NetworkInfo implements NetworkInfoI {
+class NetworkInfo implements NetworkInfoInterface {
   Connectivity connectivity;
 
   NetworkInfo(this.connectivity) {

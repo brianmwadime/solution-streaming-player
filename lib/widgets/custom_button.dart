@@ -92,7 +92,7 @@ class CustomButton extends StatelessWidget {
         );
       default:
         return EdgeInsets.all(
-          20,
+          14,
         );
     }
   }
@@ -123,23 +123,17 @@ class CustomButton extends StatelessWidget {
       case ButtonVariant.OutlineTealA400:
         return Border.all(
           color: ColorConstant.tealA400,
-          width: getHorizontalSize(
-            1.00,
-          ),
+          width: 1,
         );
       case ButtonVariant.OutlineGray600:
         return Border.all(
           color: ColorConstant.gray600,
-          width: getHorizontalSize(
-            1.00,
-          ),
+          width: 1,
         );
       case ButtonVariant.OutlineBluegray401:
         return Border.all(
           color: ColorConstant.bluegray401,
-          width: getHorizontalSize(
-            1.00,
-          ),
+          width: 1,
         );
       case ButtonVariant.FillTealA400:
       case ButtonVariant.OutlineGreenA40040:
@@ -157,29 +151,21 @@ class CustomButton extends StatelessWidget {
     switch (shape) {
       case ButtonShape.RoundedBorder10:
         return BorderRadius.circular(
-          getHorizontalSize(
-            10.00,
-          ),
+          10,
         );
       case ButtonShape.RoundedBorder2:
         return BorderRadius.circular(
-          getHorizontalSize(
-            2.00,
-          ),
+          2,
         );
       case ButtonShape.RoundedBorder22:
         return BorderRadius.circular(
-          getHorizontalSize(
-            22.00,
-          ),
+          22,
         );
       case ButtonShape.Square:
         return BorderRadius.circular(0);
       default:
         return BorderRadius.circular(
-          getHorizontalSize(
-            29.00,
-          ),
+          30,
         );
     }
   }
@@ -190,12 +176,8 @@ class CustomButton extends StatelessWidget {
         return [
           BoxShadow(
             color: ColorConstant.greenA40040,
-            spreadRadius: getHorizontalSize(
-              2.00,
-            ),
-            blurRadius: getHorizontalSize(
-              2.00,
-            ),
+            spreadRadius: 2,
+            blurRadius: 2,
             offset: Offset(
               0,
               8,
@@ -206,12 +188,8 @@ class CustomButton extends StatelessWidget {
         return [
           BoxShadow(
             color: ColorConstant.greenA40040,
-            spreadRadius: getHorizontalSize(
-              2.00,
-            ),
-            blurRadius: getHorizontalSize(
-              2.00,
-            ),
+            spreadRadius: 2,
+            blurRadius: 2,
             offset: Offset(
               0,
               8,
@@ -222,12 +200,8 @@ class CustomButton extends StatelessWidget {
         return [
           BoxShadow(
             color: ColorConstant.greenA40040,
-            spreadRadius: getHorizontalSize(
-              2.00,
-            ),
-            blurRadius: getHorizontalSize(
-              2.00,
-            ),
+            spreadRadius: 2,
+            blurRadius: 2,
             offset: Offset(
               0,
               8,
@@ -238,12 +212,8 @@ class CustomButton extends StatelessWidget {
         return [
           BoxShadow(
             color: ColorConstant.greenA40040,
-            spreadRadius: getHorizontalSize(
-              2.00,
-            ),
-            blurRadius: getHorizontalSize(
-              2.00,
-            ),
+            spreadRadius: 2,
+            blurRadius: 2,
             offset: Offset(
               0,
               8,
@@ -294,7 +264,7 @@ class CustomButton extends StatelessWidget {
       case ButtonFontStyle.PoppinsMedium12:
         return TextStyle(
           color: ColorConstant.whiteA700,
-          fontSize: 12,
+          fontSize: 14,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w500,
         );
@@ -315,7 +285,7 @@ class CustomButton extends StatelessWidget {
       default:
         return TextStyle(
           color: ColorConstant.black900,
-          fontSize: 14,
+          fontSize: 16,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w500,
         );

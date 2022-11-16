@@ -111,37 +111,6 @@ class LoginScreen extends GetWidget<LoginController> {
                                                     return null;
                                                   })
                                             ]))),
-                                Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Obx(() => CustomCheckbox(
-                                          iconSize: 24,
-                                          value: controller.tos.value,
-                                          onChange: (value) {
-                                            controller.tos.value = value;
-                                          })),
-                                      Text.rich(
-                                        TextSpan(
-                                            text: "lbl_i_accept".tr,
-                                            style: AppStyle.txtPoppinsRegular12,
-                                            children: [
-                                              TextSpan(
-                                                  text: "msg_terms_conditi".tr,
-                                                  style: AppStyle
-                                                      .txtPoppinsMedium12
-                                                      .copyWith(
-                                                          height: 1.00,
-                                                          decoration:
-                                                              TextDecoration
-                                                                  .underline))
-                                            ]),
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.left,
-                                      ),
-                                    ]),
                                 CustomButton(
                                     width: double.infinity,
                                     text: "lbl_proceed".tr,
@@ -151,18 +120,8 @@ class LoginScreen extends GetWidget<LoginController> {
                                 Align(
                                     alignment: Alignment.center,
                                     child: Padding(
-                                        padding: EdgeInsets.all(25),
-                                        child: Text("lbl_skip".tr,
-                                            overflow: TextOverflow.ellipsis,
-                                            textAlign: TextAlign.left,
-                                            style: AppStyle
-                                                .txtPoppinsMedium12WhiteA700
-                                                .copyWith(height: 1.00)))),
-                                Align(
-                                    alignment: Alignment.center,
-                                    child: Padding(
                                         padding: EdgeInsets.only(
-                                            left: 25, top: 5, right: 25),
+                                            left: 25, top: 25, right: 25),
                                         child: CommonImageView(
                                             svgPath: ImageConstant.imgDots,
                                             height: getVerticalSize(1.00),
@@ -297,7 +256,7 @@ class LoginScreen extends GetWidget<LoginController> {
                                                   padding: IconButtonPadding
                                                       .PaddingAll5,
                                                   onTap: () {
-                                                    onTapBtntf1();
+                                                    onTapBtnFacebook();
                                                   },
                                                   child: CommonImageView(
                                                       svgPath: ImageConstant
@@ -333,7 +292,7 @@ class LoginScreen extends GetWidget<LoginController> {
   }
 
   void _onLoginUserSuccess() {
-    Get.offNamed(AppRoutes.otpVerificationScreen, arguments: {
+    Get.toNamed(AppRoutes.otpVerificationScreen, arguments: {
       NavigationArgs.username: controller.phoneNumberFieldController.text
     });
   }
@@ -349,7 +308,7 @@ class LoginScreen extends GetWidget<LoginController> {
     }
   }
 
-  onTapBtntf1() async {
+  onTapBtnFacebook() async {
     var url = 'https://www.facebook.com/login/';
     if (!await launch(url)) {
       throw 'Could not launch https://www.facebook.com/login/';

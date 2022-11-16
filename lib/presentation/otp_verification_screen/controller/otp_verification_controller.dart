@@ -1,8 +1,9 @@
+import 'package:solution_ke/data/models/updateProfile/profile_response.dart';
+
 import '/core/app_export.dart';
 import 'package:solution_ke/presentation/otp_verification_screen/models/otp_verification_model.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 import 'package:flutter/material.dart';
-import 'package:solution_ke/data/models/loginWithOtp/post_login_with_otp_resp.dart';
 import 'package:solution_ke/data/apiClient/api_client.dart';
 
 class OtpVerificationController extends GetxController with CodeAutoFill {
@@ -10,7 +11,7 @@ class OtpVerificationController extends GetxController with CodeAutoFill {
 
   Rx<OtpVerificationModel> otpVerificationModelObj = OtpVerificationModel().obs;
 
-  PostLoginWithOtpResp postLoginWithOtpResp = PostLoginWithOtpResp();
+  UserProfile? profile = UserProfile();
 
   @override
   void codeUpdated() {
@@ -30,6 +31,8 @@ class OtpVerificationController extends GetxController with CodeAutoFill {
 
   @override
   void onClose() {
+    unregisterListener();
+    cancel();
     super.onClose();
   }
 
@@ -55,7 +58,7 @@ class OtpVerificationController extends GetxController with CodeAutoFill {
   }
 
   void onCreateLoginWithOtpSuccess(var response) {
-    postLoginWithOtpResp = PostLoginWithOtpResp.fromJson(response);
+    profile = ProfileResponse.fromJson(response).data;
   }
 
   void onCreateLoginWithOtpError(var err) {

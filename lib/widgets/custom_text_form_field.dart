@@ -14,49 +14,55 @@ class CustomTextFormField extends StatelessWidget {
       this.focusNode,
       this.isObscureText = false,
       this.textInputAction = TextInputAction.next,
+      this.keyboardType = TextInputType.name,
       this.maxLines,
       this.hintText,
       this.prefix,
       this.prefixConstraints,
       this.suffix,
       this.suffixConstraints,
+      this.autofocus = false,
       this.validator});
 
-  TextFormFieldShape? shape;
+  final TextFormFieldShape? shape;
 
-  TextFormFieldPadding? padding;
+  final TextFormFieldPadding? padding;
 
-  TextFormFieldVariant? variant;
+  final TextFormFieldVariant? variant;
 
-  TextFormFieldFontStyle? fontStyle;
+  final TextFormFieldFontStyle? fontStyle;
 
-  Alignment? alignment;
+  final Alignment? alignment;
 
-  double? width;
+  final double? width;
 
-  EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? margin;
 
-  TextEditingController? controller;
+  final TextEditingController? controller;
 
-  FocusNode? focusNode;
+  final FocusNode? focusNode;
 
-  bool? isObscureText;
+  final bool? isObscureText;
 
-  TextInputAction? textInputAction;
+  final TextInputAction? textInputAction;
 
-  int? maxLines;
+  final TextInputType? keyboardType;
 
-  String? hintText;
+  final int? maxLines;
 
-  Widget? prefix;
+  final String? hintText;
 
-  BoxConstraints? prefixConstraints;
+  final Widget? prefix;
 
-  Widget? suffix;
+  final BoxConstraints? prefixConstraints;
 
-  BoxConstraints? suffixConstraints;
+  final Widget? suffix;
 
-  FormFieldValidator<String>? validator;
+  final BoxConstraints? suffixConstraints;
+
+  final bool autofocus;
+
+  final FormFieldValidator<String>? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -73,9 +79,11 @@ class CustomTextFormField extends StatelessWidget {
       width: width ?? 0,
       margin: margin,
       child: TextFormField(
+        autofocus: autofocus,
         controller: controller,
         focusNode: focusNode,
         style: _setFontStyle(),
+        keyboardType: keyboardType,
         obscureText: isObscureText!,
         textInputAction: textInputAction,
         maxLines: maxLines ?? 1,
@@ -108,18 +116,14 @@ class CustomTextFormField extends StatelessWidget {
       case TextFormFieldFontStyle.PoppinsMedium14:
         return TextStyle(
           color: ColorConstant.whiteA700,
-          fontSize: getFontSize(
-            14,
-          ),
+          fontSize: 14,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w500,
         );
       default:
         return TextStyle(
           color: ColorConstant.whiteA700,
-          fontSize: getFontSize(
-            14,
-          ),
+          fontSize: 14,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w400,
         );

@@ -95,9 +95,7 @@ class CustomSearchView extends StatelessWidget {
       default:
         return TextStyle(
           color: ColorConstant.whiteA7007e,
-          fontSize: getFontSize(
-            14,
-          ),
+          fontSize: 16,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w400,
         );

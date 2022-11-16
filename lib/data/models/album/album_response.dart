@@ -1,4 +1,7 @@
+import 'package:get/get.dart';
 import 'package:solution_ke/data/models/updateProfile/profile_response.dart';
+
+import '../../apiClient/api_client.dart';
 
 class AlbumResponse {
   String? status;
@@ -62,7 +65,9 @@ class Album {
 
   Album.fromJson(Map<String, dynamic> json) {
     name = json['name'];
-    artwork = json['artwork'];
+    artwork = json['artwork'] != null
+        ? Get.find<ApiClient>().url + json['artwork']
+        : null;
     songCount = json['songCount'];
     year = json['year'];
     tosAccepted = json['tosAccepted'];

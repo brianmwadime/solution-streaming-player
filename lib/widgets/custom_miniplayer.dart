@@ -9,10 +9,9 @@ class MiniPlayer extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<PlayerController>(
         init: PlayerController(),
-        builder: ((controller) => (controller.isPlaying.value ||
-                controller.audioManager.audioList.isNotEmpty)
+        builder: ((controller) => (controller.isPlaying.value)
             ? Dismissible(
-                key: const Key('miniplayer'),
+                key: UniqueKey(),
                 direction: DismissDirection.down,
                 onDismissed: (_) {
                   Feedback.forLongPress(context);
@@ -47,28 +46,23 @@ class MiniPlayer extends StatelessWidget {
                           ),
                         ),
                         child: Center(
-                          child: Obx(() => Material(
-                                color: Colors.white,
-                                shadowColor: Colors.transparent,
-                                shape: null,
-                                elevation: 0,
-                                child: Slider(
-                                    inactiveColor: Colors.transparent,
-                                    value: controller.slider.value,
-                                    onChanged: (value) {
-                                      controller.slider.value = value;
-                                    },
-                                    onChangeEnd: (value) {
-                                      if (controller.duration.value != null) {
-                                        Duration msec = Duration(
-                                            milliseconds: (controller.duration
-                                                        .value.inMilliseconds *
-                                                    value)
-                                                .round());
-                                        controller.audioManager.seekTo(msec);
-                                      }
-                                    }),
-                              )),
+                          child: Material(
+                            color: Colors.white,
+                            shadowColor: Colors.transparent,
+                            shape: null,
+                            elevation: 0,
+                            child: Slider(
+                                inactiveColor: Colors.transparent,
+                                value: controller.position.value.inMilliseconds
+                                    .roundToDouble(),
+                                max: controller.duration.value.inMilliseconds
+                                    .toDouble(),
+                                onChanged: (newPosition) {
+                                  controller.audioManager.seekTo(Duration(
+                                      milliseconds: newPosition.round()));
+                                },
+                                onChangeEnd: (value) {}),
+                          ),
                         )),
                     Card(
                       margin: const EdgeInsets.symmetric(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:solution_ke/core/app_export.dart';
 import 'package:solution_ke/data/apiClient/api_client.dart';
 import 'package:solution_ke/data/models/album/albums_response.dart';
-import 'package:solution_ke/data/models/playlist/playlist_response.dart';
+import 'package:solution_ke/data/models/playlist/playlists_response.dart';
 import 'package:solution_ke/data/models/song/songs_response.dart';
 
 class SearchController extends GetxController {
@@ -165,9 +165,9 @@ class SearchController extends GetxController {
   }
 
   void onFetchPlaylistsSuccess(var response) {
-    if ((PlaylistResponse.fromJson(response).data?.data ?? []).isNotEmpty) {
+    if ((PlaylistsResponse.fromJson(response).data?.data ?? []).isNotEmpty) {
       searchedData['Playlists'] =
-          PlaylistResponse.fromJson(response).data?.data ?? [];
+          PlaylistsResponse.fromJson(response).data?.data ?? [];
       update();
     }
   }

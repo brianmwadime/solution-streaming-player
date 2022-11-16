@@ -1,14 +1,18 @@
+import 'package:get/get.dart';
+
+import '../../apiClient/api_client.dart';
+
 class PlaylistResponse {
   String? status;
   String? message;
-  PlaylistData? data;
+  Playlist? data;
 
   PlaylistResponse({this.status, this.message, this.data});
 
   PlaylistResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
-    data = json['data'] != null ? PlaylistData.fromJson(json['data']) : null;
+    data = json['data'] != null ? Playlist.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -21,36 +25,6 @@ class PlaylistResponse {
     }
     if (this.data != null) {
       data['data'] = this.data?.toJson();
-    }
-    return data;
-  }
-}
-
-class PlaylistData {
-  List<Playlist>? data;
-  Paginator? paginator;
-
-  PlaylistData({this.data, this.paginator});
-
-  PlaylistData.fromJson(Map<String, dynamic> json) {
-    if (json['data'] != null) {
-      data = <Playlist>[];
-      json['data'].forEach((v) {
-        data?.add(Playlist.fromJson(v));
-      });
-    }
-    paginator = json['paginator'] != null
-        ? Paginator.fromJson(json['paginator'])
-        : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-    if (this.data != null) {
-      data['data'] = this.data?.map((v) => v.toJson()).toList();
-    }
-    if (this.paginator != null) {
-      data['paginator'] = this.paginator?.toJson();
     }
     return data;
   }
@@ -83,7 +57,9 @@ class Playlist {
     name = json['name'];
     isDeleted = json['isDeleted'];
     isActive = json['isActive'];
-    artwork = json['artwork'];
+    artwork = json['artwork'] != null
+        ? Get.find<ApiClient>().url + json['artwork']
+        : null;
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     addedBy = json['addedBy'];

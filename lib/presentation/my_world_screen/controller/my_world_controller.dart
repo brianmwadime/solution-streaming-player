@@ -1,27 +1,39 @@
+import 'package:solution_ke/data/models/playlist/playlist_response.dart';
+
 import '/core/app_export.dart';
 import 'package:solution_ke/presentation/my_world_screen/models/my_world_model.dart';
 import 'package:solution_ke/widgets/custom_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:solution_ke/data/models/playlist/playlist_response.dart';
+import 'package:solution_ke/data/models/playlist/playlists_response.dart';
 import 'package:solution_ke/data/apiClient/api_client.dart';
-import 'package:solution_ke/data/models/playlist/playlist_request.dart';
-import '../models/listavatar_eight_item_model.dart';
 
 class MyWorldController extends GetxController {
   Rx<MyWorldModel> myWorldModelObj = MyWorldModel().obs;
 
   Rx<BottomBarEnum> type = BottomBarEnum.Home.obs;
 
-  PlaylistResponse playlistListResponse = PlaylistResponse();
+  PlaylistsResponse playlistListResponse = PlaylistsResponse();
+
+  RxList<Playlist> playlists = <Playlist>[].obs;
+
+  RxList<dynamic> purchased = <dynamic>[].obs;
 
   @override
   void onReady() {
     super.onReady();
-    PlaylistListRequest postPlaylistListReq = PlaylistListRequest();
-    this.fetchPlaylistList(
-      postPlaylistListReq.toJson(),
-      successCall: _onOnReadySuccess,
-      errCall: _onOnReadyError,
+    var playlistRequest = {
+      "query": {
+        "addedBy": {"\$eq": Get.find<PrefUtils>().getUserId()}
+      },
+      "options": {
+        "include": [
+          {"model": "user", "as": "_addedBy"}
+        ],
+      }
+    };
+
+    this.fetchPlaylist(
+      playlistRequest,
     );
   }
 
@@ -30,33 +42,49 @@ class MyWorldController extends GetxController {
     super.onClose();
   }
 
-  void fetchPlaylistList(Map req,
+  // Future<bool?> refresh() async {
+  //   var playlistRequest = {
+  //     "query": {
+  //       "addedBy": {"\$eq": Get.find<PrefUtils>().getUserId()}
+  //     },
+  //     "options": {
+  //       "include": [
+  //         {"model": "user", "as": "_addedBy"}
+  //       ],
+  //     }
+  //   };
+
+  //   this.fetchPlaylist(
+  //     playlistRequest,
+  //     successCall: () => true,
+  //     errCall: () => false,
+  //   );
+  // }
+
+  void fetchPlaylist(Map request,
       {VoidCallback? successCall, VoidCallback? errCall}) async {
     return Get.find<ApiClient>().fetchPlaylists(
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ${Get.find<PrefUtils>().getToken()}',
-        },
         onSuccess: (resp) {
-          onCreatePlaylistListSuccess(resp);
+          onFetchPlaylistSuccess(resp);
           if (successCall != null) {
             successCall();
           }
         },
         onError: (err) {
-          onCreatePlaylistListError(err);
+          onFetchPlaylistError(err);
           if (errCall != null) {
             errCall();
           }
         },
-        requestData: req);
+        requestData: request);
   }
 
-  void onCreatePlaylistListSuccess(var response) {
-    playlistListResponse = PlaylistResponse.fromJson(response);
+  void onFetchPlaylistSuccess(var response) {
+    playlists.value = PlaylistsResponse.fromJson(response).data?.data ?? [];
+    update();
   }
 
-  void onCreatePlaylistListError(var err) {
+  void onFetchPlaylistError(var err) {
     if (err is NoInternetException) {
       Get.rawSnackbar(
         messageText: Text(
@@ -67,22 +95,5 @@ class MyWorldController extends GetxController {
         ),
       );
     }
-  }
-
-  void _onOnReadySuccess() {
-    List<ListavatarEightItemModel> listavatarEightItemModelList = [];
-    if (playlistListResponse.data!.data! != null &&
-        playlistListResponse.data!.data!.isNotEmpty) {
-      for (var element in playlistListResponse.data!.data!) {
-        var listavatarEightItemModel = ListavatarEightItemModel();
-        listavatarEightItemModelList.add(listavatarEightItemModel);
-      }
-    }
-    myWorldModelObj.value.listavatarEightItemList.value =
-        listavatarEightItemModelList;
-  }
-
-  void _onOnReadyError() {
-    Get.snackbar('', playlistListResponse.message!.toString());
   }
 }

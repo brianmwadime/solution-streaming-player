@@ -65,7 +65,7 @@ class ListAlbumItemWidget extends StatelessWidget {
                   style: AppStyle.txtPoppinsMedium14,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [

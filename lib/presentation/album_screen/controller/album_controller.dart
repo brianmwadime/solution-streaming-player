@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:solution_ke/data/models/album/album_response.dart';
 import 'package:solution_ke/data/models/album/albums_response.dart';
 import 'package:solution_ke/data/models/song/songs_response.dart';
@@ -10,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:solution_ke/data/apiClient/api_client.dart';
 
 class AlbumController extends GetxController {
-  Album? album = Get.arguments[NavigationArgs.album];
+  Album? album;
 
   Rx<AlbumModel> albumModelObj = AlbumModel().obs;
 
@@ -22,6 +20,8 @@ class AlbumController extends GetxController {
   void onInit() {
     super.onInit();
     this.album = Get.arguments[NavigationArgs.album];
+    this.albumModelObj.value.album?.value = Get.arguments[NavigationArgs.album];
+    update();
   }
 
   @override

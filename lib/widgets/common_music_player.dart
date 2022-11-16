@@ -24,7 +24,7 @@ class MusicPlayerWidget extends StatelessWidget {
                             children: [
                               Container(
                                 height: 3,
-                                width: 335,
+                                width: 300,
                                 color: Colors.white,
                               ),
                               CommonImageView(
@@ -34,7 +34,7 @@ class MusicPlayerWidget extends StatelessWidget {
                                           .audioManager
                                           .audioList[controller.curIndex.value]
                                           .coverUrl,
-                                  height: 340,
+                                  height: 275,
                                   width: double.infinity),
                               Padding(
                                   padding: EdgeInsets.only(
@@ -64,7 +64,7 @@ class MusicPlayerWidget extends StatelessWidget {
                             ])
                       ])),
                   Padding(
-                      padding: EdgeInsets.only(left: 25, top: 20, right: 25),
+                      padding: EdgeInsets.only(left: 0, top: 0, right: 0),
                       child: SliderTheme(
                           data: SliderThemeData(
                               trackShape: RoundedRectSliderTrackShape(),
@@ -72,21 +72,17 @@ class MusicPlayerWidget extends StatelessWidget {
                               inactiveTrackColor: ColorConstant.gray800,
                               thumbColor: ColorConstant.greenA400,
                               thumbShape: RoundSliderThumbShape()),
-                          child: Obx(() => Slider(
-                              value: controller.slider.value,
-                              onChanged: (value) {
-                                controller.slider.value = value;
+                          child: Slider(
+                              value: controller.position.value.inMilliseconds
+                                  .round()
+                                  .toDouble(),
+                              max: controller.duration.value.inMilliseconds
+                                  .toDouble(),
+                              onChanged: (newPosition) {
+                                controller.audioManager.seekTo(Duration(
+                                    milliseconds: newPosition.round()));
                               },
-                              onChangeEnd: (value) {
-                                if (controller.duration.value != null) {
-                                  Duration msec = Duration(
-                                      milliseconds: (controller.duration.value
-                                                  .inMilliseconds *
-                                              value)
-                                          .round());
-                                  controller.audioManager.seekTo(msec);
-                                }
-                              })))),
+                              onChangeEnd: (value) {}))),
                   Padding(
                       padding: EdgeInsets.only(left: 25, top: 0, right: 25),
                       child: Obx(() => Row(
@@ -104,7 +100,7 @@ class MusicPlayerWidget extends StatelessWidget {
                                     style: AppStyle.txtPoppinsRegular12Gray500)
                               ]))),
                   Padding(
-                      padding: EdgeInsets.only(left: 25, top: 25, right: 25),
+                      padding: EdgeInsets.only(left: 25, top: 12, right: 25),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,

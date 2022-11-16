@@ -1,3 +1,5 @@
+import 'package:hive/hive.dart';
+
 import 'controller/otp_verification_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -65,6 +67,7 @@ class OtpVerificationScreen extends GetWidget<OtpVerificationController> {
                             child: Container(
                                 width: 260,
                                 child: Obx(() => PinCodeTextField(
+                                    autoFocus: true,
                                     appContext: context,
                                     controller: controller.otpController.value,
                                     length: 4,
@@ -120,25 +123,29 @@ class OtpVerificationScreen extends GetWidget<OtpVerificationController> {
     );
   }
 
-  void _onVerifyOtpSuccess() {
-    Get.find<PrefUtils>().setUserId(controller.postLoginWithOtpResp.data!.id!);
-    Get.find<PrefUtils>().setUsername(
-        controller.postLoginWithOtpResp.data!.username!.toString());
-    Get.find<PrefUtils>()
-        .setUserEmail(controller.postLoginWithOtpResp.data!.email!.toString());
-    Get.find<PrefUtils>()
-        .setName(controller.postLoginWithOtpResp.data!.name!.toString());
-    Get.find<PrefUtils>()
-        .setUserType(controller.postLoginWithOtpResp.data!.userType!);
-    Get.find<PrefUtils>()
-        .setToken(controller.postLoginWithOtpResp.data!.token!.toString());
-    Get.offAllNamed(AppRoutes.initialRoute, arguments: {
-      NavigationArgs.userid: controller.postLoginWithOtpResp.data!.id!
+  void _onVerifyOtpSuccess() async {
+    Get.find<PrefUtils>().setUserId(controller.profile!.id!);
+    Get.find<PrefUtils>().setUsername(controller.profile!.username!);
+    Get.find<PrefUtils>().setUserEmail(controller.profile!.email!);
+    Get.find<PrefUtils>().setName(controller.profile!.name!);
+    Get.find<PrefUtils>().setUserType(controller.profile!.userType!);
+    Get.find<PrefUtils>().setToken(controller.profile!.token!);
+
+    await Hive.box("settings").putAll({
+      'name': controller.profile?.name,
+      'id': controller.profile?.id,
+      'mobileNo': controller.profile?.mobileNo,
+      'username': controller.profile?.username,
+      'email': controller.profile?.email,
+      'avatar': controller.profile?.avatar,
+      'token': controller.profile?.token,
     });
+
+    Get.offAllNamed(AppRoutes.initialRoute,
+        arguments: {NavigationArgs.userid: controller.profile?.id});
   }
 
   void _onVerifyOtpError() {
-    Get.snackbar(
-        '', controller.postLoginWithOtpResp.message ?? "try again later.");
+    Get.snackbar('', "try again later.");
   }
 }

@@ -35,7 +35,10 @@ class AccountItemWidget extends StatelessWidget {
                         variant: IconButtonVariant.FillGray51,
                         shape: IconButtonShape.CircleBorder7,
                         padding: IconButtonPadding.PaddingAll10,
-                        child: CommonImageView(svgPath: icon)),
+                        child: CommonImageView(
+                          svgPath: icon,
+                          color: ColorConstant.tealA700,
+                        )),
                     Padding(
                         padding: EdgeInsets.only(left: 12, top: 13, bottom: 14),
                         child: Text.rich(TextSpan(text: title),

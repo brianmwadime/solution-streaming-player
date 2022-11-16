@@ -127,7 +127,7 @@ class ImageConstant {
 
   static String imgVolume39X53 = 'assets/images/img_volume_39X53.svg';
 
-  static String imgVolume = 'assets/images/img_volume.svg';
+  static String imgLogo = 'assets/images/img_volume.svg';
 
   static String imgSearch = 'assets/images/img_search.svg';
 

@@ -22,16 +22,12 @@ class CategoryItemWidget extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: CommonImageView(
             imagePath: ImageConstant.imgAvatar,
-            height: getVerticalSize(
-              91.00,
-            ),
-            width: getHorizontalSize(
-              80.00,
-            ),
+            height: 90,
+            width: 80,
           ),
         ),
         Padding(
-          padding: getPadding(
+          padding: EdgeInsets.only(
             left: 19,
             top: 20,
             right: 18,
@@ -41,9 +37,7 @@ class CategoryItemWidget extends StatelessWidget {
               categoryItemModelObj.labelTxt.value,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.left,
-              style: AppStyle.txtPoppinsMedium14.copyWith(
-                height: 1.00,
-              ),
+              style: AppStyle.txtPoppinsMedium14,
             ),
           ),
         ),

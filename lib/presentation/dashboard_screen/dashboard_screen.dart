@@ -38,22 +38,15 @@ class DashboardScreen extends GetWidget<DashboardController> {
               MiniPlayer()
             ],
           ),
-          bottomNavigationBar: CustomBottomBar(onChanged: (BottomBarEnum type) {
-            controller.type.value = type;
-            switch (type) {
-              case BottomBarEnum.Home:
-                controller.pageController.jumpToPage(0);
-                break;
-              case BottomBarEnum.Myworld:
-                controller.pageController.jumpToPage(1);
-                break;
-              case BottomBarEnum.Account:
-                controller.pageController.jumpToPage(2);
-                break;
-              default:
-                controller.pageController.jumpToPage(0);
-            }
-          })),
+          bottomNavigationBar: SafeArea(
+            child: Obx(() => CustomBottomBar(
+                  onChanged: (BottomBarEnum type, int selectedIndex) {
+                    controller.changeTabIndex(selectedIndex);
+                    controller.pageController.jumpToPage(selectedIndex);
+                  },
+                  selectedIndex: controller.tabIndex.value,
+                )),
+          )),
     );
   }
 }

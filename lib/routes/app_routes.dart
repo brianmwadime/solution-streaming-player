@@ -1,4 +1,10 @@
 import 'package:solution_ke/presentation/account_screen/binding/account_binding.dart';
+import 'package:solution_ke/presentation/albums_screen/albums_screen.dart';
+import 'package:solution_ke/presentation/albums_screen/binding/albums_binding.dart';
+import 'package:solution_ke/presentation/cart_screen/binding/cart_binding.dart';
+import 'package:solution_ke/presentation/cart_screen/cart_screen.dart';
+import 'package:solution_ke/presentation/categories_screen/binding/categories_binding.dart';
+import 'package:solution_ke/presentation/categories_screen/categories_screen.dart';
 import 'package:solution_ke/presentation/dashboard_screen/binding/dashboard_binding.dart';
 import 'package:solution_ke/presentation/dashboard_screen/dashboard_screen.dart';
 import 'package:solution_ke/presentation/homepage_screen/binding/homepage_binding.dart';
@@ -14,6 +20,12 @@ import 'package:solution_ke/presentation/onboarding_category_screen/onboarding_c
 import 'package:solution_ke/presentation/onboarding_category_screen/binding/onboarding_category_binding.dart';
 import 'package:solution_ke/presentation/onboarding_artists_screen/onboarding_artists_screen.dart';
 import 'package:solution_ke/presentation/onboarding_artists_screen/binding/onboarding_artists_binding.dart';
+import 'package:solution_ke/presentation/playlist_screen/binding/playlist_binding.dart';
+import 'package:solution_ke/presentation/playlist_screen/playlist_screen.dart';
+import 'package:solution_ke/presentation/playlists_screen/binding/playlists_binding.dart';
+import 'package:solution_ke/presentation/playlists_screen/playlists_screen.dart';
+import 'package:solution_ke/presentation/release_screen/binding/release_binding.dart';
+import 'package:solution_ke/presentation/release_screen/release_screen.dart';
 import 'package:solution_ke/presentation/search_screen/binding/search_binding.dart';
 import 'package:solution_ke/presentation/search_screen/search_screen.dart';
 import 'package:solution_ke/presentation/sign_up_screen/sign_up_screen.dart';
@@ -37,6 +49,8 @@ import 'package:solution_ke/presentation/purchase_history_screen/purchase_histor
 import 'package:solution_ke/presentation/purchase_history_screen/binding/purchase_history_binding.dart';
 import 'package:solution_ke/presentation/about_screen/about_screen.dart';
 import 'package:solution_ke/presentation/about_screen/binding/about_binding.dart';
+import 'package:solution_ke/presentation/songs_screen/binding/songs_binding.dart';
+import 'package:solution_ke/presentation/songs_screen/songs_screen.dart';
 import 'package:solution_ke/presentation/terms_conditions_screen/terms_conditions_screen.dart';
 import 'package:solution_ke/presentation/terms_conditions_screen/binding/terms_conditions_binding.dart';
 import 'package:solution_ke/presentation/success_screen/success_screen.dart';
@@ -47,7 +61,11 @@ import 'package:solution_ke/routes/middleware/authenticated_guard.dart';
 class AppRoutes {
   static String dashboardScreen = '/dashboard_screen';
 
+  static String playlistsScreen = '/playlists_screen';
+
   static String onboardingScreen = '/onboarding_screen';
+
+  static String cartScreen = '/cart_screen';
 
   static String loginScreen = "/login_screen";
 
@@ -91,6 +109,16 @@ class AppRoutes {
 
   static String searchScreen = '/search_screen';
 
+  static String songsScreen = '/songs_screen';
+
+  static String albumsScreen = '/albums_screen';
+
+  static String playlistScreen = '/playlist_screen';
+
+  static String releasesScreen = '/releases_screen';
+
+  static String categoriesScreen = '/categories_screen';
+
   static String initialRoute = '/initialRoute';
 
   static List<GetPage> pages = [
@@ -106,6 +134,13 @@ class AppRoutes {
       page: () => LoginScreen(),
       bindings: [
         LoginBinding(),
+      ],
+    ),
+    GetPage(
+      name: cartScreen,
+      page: () => CartScreen(),
+      bindings: [
+        CartBinding(),
       ],
     ),
     GetPage(
@@ -141,6 +176,34 @@ class AppRoutes {
       page: () => SignUpScreen(),
       bindings: [
         SignUpBinding(),
+      ],
+    ),
+    GetPage(
+      name: playlistsScreen,
+      page: () => PlaylistsScreen(),
+      bindings: [
+        PlaylistsBinding(),
+      ],
+    ),
+    GetPage(
+      name: playlistScreen,
+      page: () => PlaylistScreen(),
+      bindings: [
+        PlaylistBinding(),
+      ],
+    ),
+    GetPage(
+      name: songsScreen,
+      page: () => SongsScreen(),
+      bindings: [
+        SongsBinding(),
+      ],
+    ),
+    GetPage(
+      name: albumsScreen,
+      page: () => AlbumsScreen(),
+      bindings: [
+        AlbumsBinding(),
       ],
     ),
     GetPage(
@@ -195,6 +258,16 @@ class AppRoutes {
       page: () => AlbumDetailsScreen(),
       bindings: [
         AlbumDetailsBinding(),
+      ],
+      middlewares: [
+        AuthenticatedGuard(),
+      ],
+    ),
+    GetPage(
+      name: categoriesScreen,
+      page: () => CategoriesScreen(),
+      bindings: [
+        CategoriesBinding(),
       ],
       middlewares: [
         AuthenticatedGuard(),
@@ -279,6 +352,13 @@ class AppRoutes {
       page: () => OnboardingScreen(),
       bindings: [
         OnboardingBinding(),
+      ],
+    ),
+    GetPage(
+      name: releasesScreen,
+      page: () => ReleaseScreen(),
+      bindings: [
+        ReleaseBinding(),
       ],
     ),
     GetPage(

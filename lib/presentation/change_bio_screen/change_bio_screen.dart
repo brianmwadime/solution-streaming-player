@@ -1,3 +1,5 @@
+import 'package:hive/hive.dart';
+
 import 'controller/change_bio_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_ke/core/app_export.dart';
@@ -98,7 +100,10 @@ class ChangeBioScreen extends GetWidget<ChangeBioController> {
   }
 
   void _onUpdateBioSuccess() {
-    Get.snackbar('', controller.profileResponse.message!.toString());
+    Hive.box("settings").putAll({
+      "name": controller.profileResponse.data?.name,
+      "username": controller.profileResponse.data?.username
+    });
   }
 
   void _onUpdateBioError() {
