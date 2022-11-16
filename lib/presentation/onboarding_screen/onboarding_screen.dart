@@ -29,7 +29,7 @@ class OnboardingScreen extends GetWidget<OnboardingController> {
                                   padding:
                                       getPadding(left: 20, top: 16, right: 20),
                                   child: CommonImageView(
-                                      svgPath: ImageConstant.imgVolume,
+                                      svgPath: ImageConstant.imgLogo,
                                       height: getVerticalSize(56.00),
                                       width: getHorizontalSize(69.00))),
                               Padding(

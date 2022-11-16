@@ -1,3 +1,4 @@
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:solution_ke/data/models/album/album_response.dart';
 import 'package:solution_ke/data/models/releases/releases_response.dart';
 import 'package:solution_ke/data/models/song/song_response.dart';
@@ -29,24 +30,68 @@ class HomepageScreen extends StatelessWidget {
             leading: CustomIconButton(
                 shape: IconButtonShape.RoundedBorder13,
                 padding: IconButtonPadding.none,
-                height: 40,
-                width: 40,
+                height: 38,
+                width: 38,
                 alignment: Alignment.centerRight,
                 variant: IconButtonVariant.none,
                 onTap: () {
                   onTapAccount();
                 },
-                child: CommonImageView(imagePath: ImageConstant.imgIntersect)),
+                child: Hive.box('settings').get('avatar') == null
+                    ? CommonImageView(svgPath: ImageConstant.imgLogo)
+                    : CommonImageView(url: Hive.box('settings').get('avatar'))),
             backgroundColor: Colors.transparent,
             actions: [
               CustomIconButton(
                   padding: IconButtonPadding.PaddingAll1,
                   height: 38,
                   width: 38,
-                  alignment: Alignment.centerLeft,
+                  alignment: Alignment.center,
                   variant: IconButtonVariant.OutlineBlack9001a,
                   child:
                       CommonImageView(svgPath: ImageConstant.imgNotification)),
+              ValueListenableBuilder(
+                  valueListenable: Hive.box('cart').listenable(),
+                  builder: (context, box, widget) {
+                    var items = (box as Box)
+                        .get('items', defaultValue: [])?.toList() as List;
+                    return Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        IconButton(
+                            alignment: Alignment.center,
+                            onPressed: () {
+                              Get.toNamed(AppRoutes.cartScreen);
+                            },
+                            icon: Icon(Icons.shopping_cart_rounded)),
+                        items.length > 0
+                            ? new Positioned(
+                                right: 5,
+                                top: 5,
+                                child: new Container(
+                                  padding: EdgeInsets.all(2),
+                                  decoration: new BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  constraints: BoxConstraints(
+                                    minWidth: 14,
+                                    minHeight: 14,
+                                  ),
+                                  child: Text.rich(
+                                    TextSpan(text: items.length.toString()),
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 8,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              )
+                            : new Container()
+                      ],
+                    );
+                  }),
               SizedBox(
                 width: 20,
               ),
@@ -67,7 +112,8 @@ class HomepageScreen extends StatelessWidget {
                             padding: EdgeInsets.only(left: 20, right: 20),
                             child: Text.rich(
                                 TextSpan(
-                                    text: Get.find<PrefUtils>().getUsername()),
+                                    text: Hive.box('settings').get('name')
+                                        as String?),
                                 overflow: TextOverflow.ellipsis,
                                 textAlign: TextAlign.justify,
                                 style: AppStyle.txtPoppinsMedium25)),
@@ -196,7 +242,6 @@ class HomepageScreen extends StatelessWidget {
                                     model: model,
                                   );
                                 }))),
-
                         Divider(
                           color: ColorConstant.whiteA70026,
                           height: 40,
@@ -283,27 +328,6 @@ class HomepageScreen extends StatelessWidget {
                                     width: 20,
                                   ),
                                 ))),
-                        // Container(
-                        //     height: 200,
-                        //     width: double.infinity,
-                        //     child: Obx(() => ListView.separated(
-                        //         padding:
-                        //             EdgeInsets.only(left: 20, top: 20, right: 20),
-                        //         scrollDirection: Axis.horizontal,
-                        //         physics: BouncingScrollPhysics(),
-                        //         itemCount: controller.homepageModelObj.value
-                        //             .categorySoundtemList.length,
-                        //         separatorBuilder:
-                        //             (BuildContext context, int index) => SizedBox(
-                        //                   width: 20,
-                        //                 ),
-                        //         itemBuilder: (context, index) {
-                        //           SoundLevelItemModel model = controller
-                        //               .homepageModelObj
-                        //               .value
-                        //               .categorySoundtemList[index];
-                        //           return SoundLevelItemWidget(model);
-                        //         })))
                       ])))),
     ));
   }

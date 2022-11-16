@@ -50,18 +50,19 @@ class PurchaseScreen extends StatelessWidget {
                               margin:
                                   EdgeInsets.only(left: 25, top: 20, right: 15),
                               child: Stack(children: [
-                                if (controller.album != null)
-                                  CommonImageView(
-                                      color: Colors.teal,
-                                      url: controller.album?.artwork,
-                                      height: double.infinity,
-                                      width: double.infinity),
-                                if (controller.song != null)
-                                  CommonImageView(
-                                      color: Colors.teal,
-                                      url: controller.song?.artwork,
-                                      height: double.infinity,
-                                      width: double.infinity),
+                                // if (controller.album != null)
+                                CommonImageView(
+                                    color: Colors.teal,
+                                    fit: BoxFit.fitWidth,
+                                    imagePath: "assets/images/cover.jpg",
+                                    height: double.infinity,
+                                    width: double.infinity),
+                                // if (controller.song != null)
+                                //   CommonImageView(
+                                //       color: Colors.teal,
+                                //       url: controller.song?.artwork,
+                                //       height: double.infinity,
+                                //       width: double.infinity),
                                 Positioned(
                                   bottom: 0,
                                   left: 0,
@@ -79,20 +80,28 @@ class PurchaseScreen extends StatelessWidget {
                                           children: [
                                             Text.rich(
                                                 TextSpan(
-                                                    text:
-                                                        controller.album?.name),
+                                                    text: controller
+                                                        .items?.length
+                                                        .toString(),
+                                                    children: [
+                                                      TextSpan(
+                                                          text: " Songs/Albums")
+                                                    ]),
                                                 overflow: TextOverflow.ellipsis,
                                                 textAlign: TextAlign.left,
                                                 style: AppStyle
                                                     .txtPoppinsSemiBold20),
-                                            Text.rich(
-                                                TextSpan(
-                                                    text: controller
-                                                        .album?.artist?.name),
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.left,
-                                                style: AppStyle
-                                                    .txtSFProDisplaySemibold9),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            // Text.rich(
+                                            //     TextSpan(
+                                            //         text: controller
+                                            //             .album?.artist?.name),
+                                            //     overflow: TextOverflow.ellipsis,
+                                            //     textAlign: TextAlign.left,
+                                            //     style: AppStyle
+                                            //         .txtSFProDisplaySemibold9),
                                             CommonImageView(
                                                 svgPath:
                                                     ImageConstant.imgLevels,
@@ -108,14 +117,15 @@ class PurchaseScreen extends StatelessWidget {
                               child: Text.rich(
                                   TextSpan(text: "KES", children: [
                                     TextSpan(text: " "),
-                                    if (controller.album != null)
-                                      TextSpan(
-                                          text: controller.album?.basePrice
-                                              ?.toString()),
-                                    if (controller.song != null)
-                                      TextSpan(
-                                          text: controller.song?.basePrice
-                                              ?.toString())
+                                    TextSpan(
+                                        text: controller.items
+                                            ?.fold(
+                                                0.00,
+                                                (value, item) =>
+                                                    (value! as double) +
+                                                    double.parse(
+                                                        item['basePrice']))
+                                            .toString()),
                                   ]),
                                   overflow: TextOverflow.ellipsis,
                                   textAlign: TextAlign.left,
@@ -179,43 +189,59 @@ class PurchaseScreen extends StatelessWidget {
                               padding: ButtonPadding.PaddingAll11,
                               fontStyle: ButtonFontStyle.PoppinsMedium20,
                               onTap: (() async {
-                                if (controller.album != null) {
-                                  Album album = controller.album!;
-                                  var order = {
-                                    "items": [
-                                      {
-                                        "itemId": album.id,
-                                        "itemType": "2",
-                                        "price": double.tryParse(
-                                            album.basePrice ?? "0")
-                                      },
-                                    ],
-                                    "totalPrice":
-                                        double.tryParse(album.basePrice ?? "0")
-                                  };
-                                  await controller.makePurchaseOrder(order,
-                                      successCall: showSuccess,
-                                      errCall: showError);
-                                }
+                                var order = {
+                                  "items": controller.items?.map((item) {
+                                    // Album? album = Album.fromJson(item);
+                                    return {
+                                      "itemId": item['id'],
+                                      "itemType": "1",
+                                      "price": double.tryParse(
+                                          item['basePrice'] ?? "0")
+                                    };
+                                  }).toList(),
+                                  "totalPrice": controller.items?.fold(
+                                      0.00,
+                                      (value, item) =>
+                                          (value! as double) +
+                                          double.parse(item['basePrice']))
+                                };
 
-                                if (controller.song != null) {
-                                  Song song = controller.song!;
-                                  var order = {
-                                    "items": [
-                                      {
-                                        "itemId": song.id,
-                                        "itemType": "1",
-                                        "price": double.tryParse(
-                                            song.basePrice ?? "0")
-                                      },
-                                    ],
-                                    "totalPrice":
-                                        double.tryParse(song.basePrice ?? "0")
-                                  };
-                                  await controller.makePurchaseOrder(order,
-                                      successCall: showSuccess,
-                                      errCall: showError);
-                                }
+                                // if (controller.album != null) {
+                                //   Album album = controller.album!;
+                                //   var order = {
+                                //     "items": [
+                                //       {
+                                //         "itemId": album.id,
+                                //         "itemType": "2",
+                                //         "price": double.tryParse(
+                                //             album.basePrice ?? "0")
+                                //       },
+                                //     ],
+                                //     "totalPrice":
+                                //         double.tryParse(album.basePrice ?? "0")
+                                //   };
+                                //   await controller.makePurchaseOrder(order,
+                                //       successCall: showSuccess,
+                                //       errCall: showError);
+                                // }
+
+                                // if (controller.song != null) {
+                                //   Song song = controller.song!;
+                                //   var order = {
+                                //     "items": [
+                                //       {
+                                //         "itemId": song.id,
+                                //         "itemType": "1",
+                                //         "price": double.tryParse(
+                                //             song.basePrice ?? "0")
+                                //       },
+                                //     ],
+                                //     "totalPrice":
+                                //         double.tryParse(song.basePrice ?? "0")
+                                //   };
+                                await controller.makePurchaseOrder(order,
+                                    successCall: showSuccess,
+                                    errCall: showError);
                               }),
                               alignment: Alignment.center),
                           Align(

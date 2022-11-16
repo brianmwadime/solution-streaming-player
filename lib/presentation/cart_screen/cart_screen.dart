@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:solution_ke/core/app_export.dart';
+import 'package:solution_ke/data/models/album/album_response.dart';
 import 'package:solution_ke/data/models/song/song_response.dart';
+import 'package:solution_ke/presentation/cart_screen/controller/cart_controller.dart';
 import 'package:solution_ke/presentation/player_screen/controller/player_controller.dart';
-import 'package:solution_ke/presentation/songs_screen/controller/songs_controller.dart';
-import 'package:solution_ke/widgets/common_playlist_head.dart';
+import 'package:solution_ke/widgets/common_cart_head.dart';
 import 'package:solution_ke/widgets/custom_icon_button.dart';
 import 'package:solution_ke/widgets/custom_miniplayer.dart';
 
-import 'widgets/song_tile_trailing_menu.dart';
+import 'widgets/cart_tile_trailing_menu.dart';
 
-class SongsScreen extends GetWidget<SongsController> {
+class CartScreen extends GetWidget<CartController> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,7 +28,7 @@ class SongsScreen extends GetWidget<SongsController> {
                     child:
                         CommonImageView(svgPath: ImageConstant.imgArrowleft)),
                 elevation: 0,
-                title: Text(controller.title.value,
+                title: Text("Cart",
                     overflow: TextOverflow.ellipsis,
                     style: AppStyle.txtPoppinsMedium18),
                 centerTitle: true,
@@ -38,22 +40,22 @@ class SongsScreen extends GetWidget<SongsController> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    if (controller.pageType.value == 1)
-                      PlaylistHead(
-                        songsList: controller.songs,
-                        offline: false,
-                        fromDownloads: false,
-                      ),
+                    CartHead(
+                      cartList: Hive.box('cart').get('items', defaultValue: []),
+                      buyItems: () => goToBuyScreen(
+                          Hive.box('cart').get('items', defaultValue: [])),
+                    ),
                     const SizedBox(height: 5),
-                    Obx(() => ListView.builder(
+                    ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: controller.songs.length,
+                        itemCount: Hive.box('cart')
+                            .get('items', defaultValue: []).length,
                         itemBuilder: ((context, index) {
+                          var item = Hive.box('cart')
+                              .get('items', defaultValue: [])[index];
                           return ListTile(
-                            onTap: () {
-                              onTapSong([controller.songs[index]]);
-                            },
+                            onTap: () {},
                             leading: Card(
                               elevation: 5,
                               color: Colors.transparent,
@@ -65,33 +67,38 @@ class SongsScreen extends GetWidget<SongsController> {
                                 height: 50,
                                 width: 50,
                                 child: CommonImageView(
-                                  url: controller.songs[index].artwork,
+                                  url: item['artwork'],
                                   imagePath: 'assets/images/cover.jpg',
                                 ),
                               ),
                             ),
                             title: Text.rich(
-                              TextSpan(text: controller.songs[index].name),
+                              TextSpan(text: item['name']),
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(color: Colors.white),
                             ),
                             subtitle: Text(
-                              '${controller.songs[index].artist?.name ?? 'Unknown'} • ${controller.songs[index].album?.name ?? 'Unknown'}',
+                              '${item['artist']?['name'] ?? 'Unknown'} • ${item['album']?['name'] ?? 'Unknown'}',
                               overflow: TextOverflow.ellipsis,
                               style: AppStyle.txtPoppinsMedium14WhiteA70099,
                             ),
-                            trailing: SongTileTrailingMenu(
-                              data: controller.songs[index].toJson(),
-                              isPlaylist: (controller.pageType.value == 1),
-                              deleteLiked: (Map item) {
-                                if (controller.pageType.value == 1) {
-                                  controller.deletePlaylistTrack(
-                                      controller.typeId.value, item["id"]);
-                                }
-                              },
-                            ),
+                            // trailing: CartTileTrailingMenu(
+                            //   data: item,
+                            //   isPlaylist: false,
+                            //   deleteLiked: (Map item) {
+                            //     if (controller.pageType.value == 1) {
+                            //       controller.deletePlaylistTrack(
+                            //           controller.typeId.value, item["id"]);
+                            //     }
+                            //   },
+                            // ),
+                            trailing: Text.rich(
+                                TextSpan(text: item['basePrice']),
+                                textAlign: TextAlign.center,
+                                overflow: TextOverflow.ellipsis,
+                                style: AppStyle.txtPoppinsMedium14WhiteA70099),
                           );
-                        })))
+                        }))
                   ],
                 ),
               )),
@@ -105,5 +112,10 @@ class SongsScreen extends GetWidget<SongsController> {
     Get.find<PlayerController>().updatePlaylist(songs);
     Get.toNamed(AppRoutes.playerScreen,
         arguments: {NavigationArgs.songs: songs});
+  }
+
+  goToBuyScreen(List<dynamic> items) {
+    Get.toNamed(AppRoutes.purchaseScreen,
+        arguments: {NavigationArgs.cartItems: items});
   }
 }

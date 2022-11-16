@@ -1,5 +1,11 @@
+import 'dart:io';
+
+import 'package:hive/hive.dart';
 import 'package:solution_ke/core/app_export.dart';
 import 'package:solution_ke/core/utils/progress_dialog_utils.dart';
+
+typedef void OnDownloadProgressCallback(int receivedBytes, int totalBytes);
+typedef void OnUploadProgressCallback(int sentBytes, int totalBytes);
 
 class ApiClient extends GetConnect {
   var url = Get.find<EnvConfig>().config.url;
@@ -11,19 +17,22 @@ class ApiClient extends GetConnect {
     httpClient.addRequestModifier<dynamic>((request) {
       Map<String, String> headers = {
         "Authorization": "Bearer ${Get.find<PrefUtils>().getToken()}",
-        "Content-Type": "application/json"
       };
+
+      if (request.url.path.contains('device/api/v1/upload')) {
+        headers["Content-Type"] = "multipart/form-data";
+      } else {
+        headers["Content-Type"] = "application/json";
+      }
+
       print(Get.find<PrefUtils>().getToken());
       request.headers.addAll(headers);
       return request;
     });
     httpClient.addResponseModifier<dynamic>((request, response) {
       if (response.statusCode == 401) {
-        // Get.snackbar(
-        //   'Invalid session',
-        //   'Please log in againg to continue',
-        //   snackPosition: SnackPosition.BOTTOM,
-        // );
+        Hive.box('settings').deleteAll(
+            ['name', 'username', 'token', 'email', 'mobileNo', 'id']);
         Get.find<PrefUtils>().clearPreferencesData();
         Get.offAllNamed(AppRoutes.initialRoute);
       }
@@ -415,6 +424,33 @@ class ApiClient extends GetConnect {
     }
   }
 
+  Future uploadFile(
+      {Function(dynamic data)? onSuccess,
+      Function(dynamic error)? onError,
+      Map<String, String> headers = const {},
+      required dynamic requestData,
+      OnUploadProgressCallback? onUploadProgress}) async {
+    ProgressDialogUtils.showProgressDialog();
+
+    try {
+      await isNetworkConnected();
+      Response response = await httpClient.post('$url/device/api/v1/upload',
+          headers: headers, body: requestData);
+      ProgressDialogUtils.hideProgressDialog();
+      if (_isSuccessCall(response)) {
+        onSuccess!(response.body);
+      } else {
+        onError!(
+          response.hasError ? response.body : 'Something Went Wrong!',
+        );
+      }
+    } catch (error, stackTrace) {
+      ProgressDialogUtils.hideProgressDialog();
+      Logger.log(error, stackTrace: stackTrace);
+      onError!(error);
+    }
+  }
+
   Future updateSongPlayCount(int id,
       {Function(dynamic data)? onSuccess,
       Function(dynamic error)? onError,
@@ -468,12 +504,40 @@ class ApiClient extends GetConnect {
     }
   }
 
-  Future fetchArtists(
-      {Function(dynamic data)? onSuccess,
-      Function(dynamic error)? onError,
-      Map<String, String> headers = const {},
-      Map requestData = const {},
-      String? id = ''}) async {
+  Future fetchPurchaseHistory({
+    Function(dynamic data)? onSuccess,
+    Function(dynamic error)? onError,
+    Map<String, String> headers = const {},
+    Map requestData = const {},
+  }) async {
+    ProgressDialogUtils.showProgressDialog();
+    try {
+      await isNetworkConnected();
+      Response response = await httpClient.post(
+          '$url/device/api/v1/user_order/list',
+          headers: headers,
+          body: requestData);
+      ProgressDialogUtils.hideProgressDialog();
+      if (_isSuccessCall(response)) {
+        onSuccess!(response.body);
+      } else {
+        onError!(
+          response.hasError ? response.body : 'Something Went Wrong!',
+        );
+      }
+    } catch (error, stackTrace) {
+      ProgressDialogUtils.hideProgressDialog();
+      Logger.log(error, stackTrace: stackTrace);
+      onError!(error);
+    }
+  }
+
+  Future fetchArtists({
+    Function(dynamic data)? onSuccess,
+    Function(dynamic error)? onError,
+    Map<String, String> headers = const {},
+    Map requestData = const {},
+  }) async {
     ProgressDialogUtils.showProgressDialog();
     try {
       await isNetworkConnected();

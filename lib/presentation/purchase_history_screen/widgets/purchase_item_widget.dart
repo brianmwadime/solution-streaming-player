@@ -1,15 +1,13 @@
-import '../controller/purchase_history_controller.dart';
-import '../models/listcheckmark_item_model.dart';
+import 'package:solution_ke/data/models/orders/orders_response.dart';
+
 import 'package:flutter/material.dart';
 import 'package:solution_ke/core/app_export.dart';
 
 // ignore: must_be_immutable
 class PurchaseItemWidget extends StatelessWidget {
-  PurchaseItemWidget(this.listcheckmarkItemModelObj);
+  PurchaseItemWidget(this.order);
 
-  ListcheckmarkItemModel listcheckmarkItemModelObj;
-
-  var controller = Get.find<PurchaseHistoryController>();
+  UserOrder order;
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +52,8 @@ class PurchaseItemWidget extends StatelessWidget {
             )
           ],
         ),
-        Text(
-          "lbl_kes_500".tr,
+        Text.rich(
+          TextSpan(text: order.finalPrice),
           overflow: TextOverflow.ellipsis,
           style: AppStyle.txtPoppinsRegular12,
         ),

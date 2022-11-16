@@ -109,7 +109,6 @@ class ChangeBioController extends GetxController {
   }
 
   void _onOnReadySuccess() {
-    // changeBioModelObj.value = profileResponse.data as ChangeBioModel;
     nameController.text = profileResponse.data?.name ?? "";
     aliasController.text = profileResponse.data?.username ?? "";
   }

@@ -1,3 +1,7 @@
+import 'package:get/get.dart';
+
+import '../../apiClient/api_client.dart';
+
 class ProfileResponse {
   String? status;
   String? message;
@@ -42,6 +46,7 @@ class UserProfile {
   int? userType;
   String? mobileNo;
   bool? isDeleted;
+  String? token;
 
   UserProfile(
       {this.id,
@@ -58,7 +63,8 @@ class UserProfile {
       this.kraPin,
       this.userType,
       this.mobileNo,
-      this.isDeleted});
+      this.isDeleted,
+      this.token});
 
   UserProfile.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -69,13 +75,16 @@ class UserProfile {
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     addedBy = json['addedBy'];
-    avatar = json['avatar'];
+    avatar = json['avatar'] != null
+        ? Get.find<ApiClient>().url + json['avatar']
+        : null;
     updatedBy = json['updatedBy'];
     nationalId = json['nationalId'];
     kraPin = json['kraPin'];
     userType = json['userType'];
     mobileNo = json['mobileNo'];
     isDeleted = json['isDeleted'];
+    token = json['token'];
   }
 
   Map<String, dynamic> toJson() {
@@ -124,6 +133,9 @@ class UserProfile {
     }
     if (this.isDeleted != null) {
       data['isDeleted'] = this.isDeleted;
+    }
+    if (this.token != null) {
+      data['token'] = this.token;
     }
     return data;
   }

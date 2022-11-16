@@ -1,3 +1,4 @@
+import 'package:solution_ke/core/utils/player_utils.dart';
 import 'package:solution_ke/data/models/album/album_response.dart';
 import 'package:solution_ke/data/models/song/song_response.dart';
 import 'package:solution_ke/presentation/player_screen/controller/player_controller.dart';
@@ -106,7 +107,8 @@ class AlbumScreen extends GetWidget<AlbumController> {
                                                       .album
                                                       ?.value;
                                                   if (album != null) {
-                                                    goToBuyScreen(album);
+                                                    // goToBuyScreen(album);
+                                                    addAlbumToCart(album);
                                                   }
                                                 }),
                                                 width: 95,
@@ -153,40 +155,35 @@ class AlbumScreen extends GetWidget<AlbumController> {
                                                 textAlign: TextAlign.left,
                                                 style: AppStyle
                                                     .txtPoppinsSemiBold18)),
-                                        Padding(
+                                        Obx(() => ListView.separated(
                                             padding: EdgeInsets.only(
-                                                top: 0, bottom: 20),
-                                            child: Obx(() => ListView.separated(
-                                                physics:
-                                                    BouncingScrollPhysics(),
-                                                shrinkWrap: true,
-                                                separatorBuilder:
-                                                    (context, index) {
-                                                  return Divider(
-                                                      height: 20,
-                                                      color: ColorConstant
-                                                          .whiteA70026);
-                                                },
-                                                itemCount: controller
-                                                    .albumModelObj
-                                                    .value
-                                                    .songsList
-                                                    .length,
-                                                itemBuilder: (context, index) {
-                                                  Song model = controller
-                                                      .albumModelObj
-                                                      .value
-                                                      .songsList[index];
-                                                  return InkWell(
-                                                    onTap: (() =>
-                                                        onTapSong([model])),
-                                                    child: BuySongItemWidget(
-                                                        model,
-                                                        onTapBtnBuy: () =>
-                                                            goToBuySongScreen(
-                                                                model)),
-                                                  );
-                                                }))),
+                                                top: 20,
+                                                bottom: 20,
+                                                left: 25,
+                                                right: 25),
+                                            physics: BouncingScrollPhysics(),
+                                            shrinkWrap: true,
+                                            separatorBuilder: (context, index) {
+                                              return Divider(
+                                                  height: 20,
+                                                  color: ColorConstant
+                                                      .whiteA70026);
+                                            },
+                                            itemCount: controller.albumModelObj
+                                                .value.songsList.length,
+                                            itemBuilder: (context, index) {
+                                              Song model = controller
+                                                  .albumModelObj
+                                                  .value
+                                                  .songsList[index];
+                                              return InkWell(
+                                                onTap: (() =>
+                                                    onTapSong([model])),
+                                                child: BuySongItemWidget(model,
+                                                    onTapBtnBuy: () =>
+                                                        addSongToCart(model)),
+                                              );
+                                            })),
                                         Obx(() => SectionHeaderWidget(
                                             hideActions: true,
                                             title:
@@ -226,7 +223,7 @@ class AlbumScreen extends GetWidget<AlbumController> {
                                                         AlbumBuyMoreItemWidget(
                                                       album: model,
                                                       onTapBuy: () =>
-                                                          goToBuyScreen(model),
+                                                          addAlbumToCart(model),
                                                     ),
                                                   );
                                                 })))

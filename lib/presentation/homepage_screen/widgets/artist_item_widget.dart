@@ -1,6 +1,5 @@
 import 'package:solution_ke/data/models/updateProfile/profile_response.dart';
 
-import '../controller/homepage_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_ke/core/app_export.dart';
 
@@ -10,8 +9,6 @@ class ArtistItemWidget extends StatelessWidget {
 
   UserProfile user;
 
-  var controller = Get.find<HomepageController>();
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,13 +16,16 @@ class ArtistItemWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Align(
-          alignment: Alignment.centerLeft,
-          child: CommonImageView(
-            url: user.avatar,
-            imagePath: "assets/images/artist.png",
+        Card(
+          shape: CircleBorder(),
+          clipBehavior: Clip.antiAlias,
+          child: SizedBox(
             height: 100,
             width: 100,
+            child: CommonImageView(
+              url: user.avatar,
+              imagePath: "assets/images/artist.png",
+            ),
           ),
         ),
         Padding(

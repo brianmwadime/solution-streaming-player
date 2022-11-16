@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:solution_ke/data/apiClient/api_client.dart';
+import 'package:solution_ke/data/models/updateProfile/profile_response.dart';
 
 import '/core/app_export.dart';
-import 'package:solution_ke/presentation/account_screen/models/account_model.dart';
+
+typedef SuccessCallback = Function(ProfileResponse data);
 
 class AccountController extends GetxController {
-  Rx<AccountModel> accountModelObj = AccountModel().obs;
-
   @override
   void onReady() {
     super.onReady();
@@ -17,24 +17,34 @@ class AccountController extends GetxController {
     super.onClose();
   }
 
-  void logout({VoidCallback? successCall, VoidCallback? errCall}) async {
-    return Get.find<ApiClient>().logout(
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ${Get.find<PrefUtils>().getToken()}',
-        },
+  void callUpdateUpdateProfile(Map data,
+      {SuccessCallback? successCall, VoidCallback? errCall}) async {
+    return Get.find<ApiClient>().updateProfile(
         onSuccess: (resp) {
-          onLogoutSuccess(resp);
           if (successCall != null) {
-            successCall();
+            successCall(ProfileResponse.fromJson(resp));
           }
         },
         onError: (err) {
-          onCreatePlaylistListError(err);
           if (errCall != null) {
             errCall();
           }
-        });
+        },
+        requestData: data);
+  }
+
+  void logout({VoidCallback? successCall, VoidCallback? errCall}) async {
+    return Get.find<ApiClient>().logout(onSuccess: (resp) {
+      onLogoutSuccess(resp);
+      if (successCall != null) {
+        successCall();
+      }
+    }, onError: (err) {
+      onCreatePlaylistListError(err);
+      if (errCall != null) {
+        errCall();
+      }
+    });
   }
 
   void onLogoutSuccess(var response) {}

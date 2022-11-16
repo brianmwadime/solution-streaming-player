@@ -5,7 +5,7 @@ import 'package:solution_ke/data/models/playlist/playlist_track_response.dart';
 import 'package:solution_ke/data/models/song/song_response.dart';
 import 'package:solution_ke/data/models/song/songs_response.dart';
 
-class SongsController extends GetxController {
+class CartController extends GetxController {
   RxList<Song> songs = <Song>[].obs;
   RxString title = "Songs".obs;
 
@@ -16,15 +16,6 @@ class SongsController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    pageType.value = Get.arguments[NavigationArgs.pageType];
-
-    if (Get.arguments[NavigationArgs.typeId] != null) {
-      typeId.value = Get.arguments[NavigationArgs.typeId];
-    }
-
-    if (Get.arguments[NavigationArgs.pageType] != null) {
-      title.value = Get.arguments[NavigationArgs.pageTitle];
-    }
   }
 
   @override

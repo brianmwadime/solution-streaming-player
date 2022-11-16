@@ -8,6 +8,7 @@ class NavigationArgs {
   static String album = "album";
 
   static String song = "song";
+  static String cartItems = "cartItems";
   static String songs = "songs";
 
   static String userid = "userId";

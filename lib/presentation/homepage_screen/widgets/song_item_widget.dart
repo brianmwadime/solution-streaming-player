@@ -1,7 +1,4 @@
-import 'package:solution_ke/data/models/album/album_response.dart';
 import 'package:solution_ke/data/models/song/song_response.dart';
-
-import '../controller/homepage_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_ke/core/app_export.dart';
 
@@ -10,8 +7,6 @@ class ListSongItemWidget extends StatelessWidget {
   ListSongItemWidget(this.song);
 
   Song song;
-
-  var controller = Get.find<HomepageController>();
 
   @override
   Widget build(BuildContext context) {

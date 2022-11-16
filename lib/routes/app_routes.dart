@@ -1,6 +1,8 @@
 import 'package:solution_ke/presentation/account_screen/binding/account_binding.dart';
 import 'package:solution_ke/presentation/albums_screen/albums_screen.dart';
 import 'package:solution_ke/presentation/albums_screen/binding/albums_binding.dart';
+import 'package:solution_ke/presentation/cart_screen/binding/cart_binding.dart';
+import 'package:solution_ke/presentation/cart_screen/cart_screen.dart';
 import 'package:solution_ke/presentation/categories_screen/binding/categories_binding.dart';
 import 'package:solution_ke/presentation/categories_screen/categories_screen.dart';
 import 'package:solution_ke/presentation/dashboard_screen/binding/dashboard_binding.dart';
@@ -62,6 +64,8 @@ class AppRoutes {
   static String playlistsScreen = '/playlists_screen';
 
   static String onboardingScreen = '/onboarding_screen';
+
+  static String cartScreen = '/cart_screen';
 
   static String loginScreen = "/login_screen";
 
@@ -130,6 +134,13 @@ class AppRoutes {
       page: () => LoginScreen(),
       bindings: [
         LoginBinding(),
+      ],
+    ),
+    GetPage(
+      name: cartScreen,
+      page: () => CartScreen(),
+      bindings: [
+        CartBinding(),
       ],
     ),
     GetPage(

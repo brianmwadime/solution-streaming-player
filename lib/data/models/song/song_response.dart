@@ -1,5 +1,8 @@
+import 'package:get/get.dart';
 import 'package:solution_ke/data/models/album/album_response.dart';
 import 'package:solution_ke/data/models/updateProfile/profile_response.dart';
+
+import '../../apiClient/api_client.dart';
 
 class SongResponse {
   String? status;
@@ -76,7 +79,9 @@ class Song {
   Song.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    filePath = json['filePath'];
+    filePath = json['filePath'] != null
+        ? Get.find<ApiClient>().url + json['filePath']
+        : null;
     trackLength = json['trackLength'];
     categoryId = json['categoryId'];
     albumId = json['albumId'];
@@ -92,7 +97,9 @@ class Song {
     album = json['_albumId'] != null ? Album.fromJson(json['_albumId']) : null;
     updatedBy = json['updatedBy'];
     fileType = json['fileType'];
-    artwork = json['artwork'];
+    artwork = json['artwork'] != null
+        ? Get.find<ApiClient>().url + json['artwork']
+        : null;
     basePrice = json['basePrice'];
     thanksNote = json['thanksNote'];
     tosAccepted = json['tosAccepted'];

@@ -22,6 +22,8 @@ void main() async {
   Get.put(PlayerController());
   // Get.put(PlaylistsController());
 
+  await openHiveBox('settings');
+  await openHiveBox('cart');
   await openHiveBox('Favorite Songs');
   await openHiveBox("cache", limit: true);
 

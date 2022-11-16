@@ -1,7 +1,5 @@
 import 'package:solution_ke/data/models/album/album_response.dart';
 import 'package:solution_ke/widgets/custom_button.dart';
-
-import '../controller/album_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_ke/core/app_export.dart';
 
@@ -12,8 +10,6 @@ class AlbumBuyMoreItemWidget extends StatelessWidget {
 
   final Album album;
   final VoidCallback? onTapBuy;
-
-  var controller = Get.find<AlbumController>();
 
   @override
   Widget build(BuildContext context) {

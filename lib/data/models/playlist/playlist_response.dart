@@ -1,3 +1,7 @@
+import 'package:get/get.dart';
+
+import '../../apiClient/api_client.dart';
+
 class PlaylistResponse {
   String? status;
   String? message;
@@ -53,7 +57,9 @@ class Playlist {
     name = json['name'];
     isDeleted = json['isDeleted'];
     isActive = json['isActive'];
-    artwork = json['artwork'];
+    artwork = json['artwork'] != null
+        ? Get.find<ApiClient>().url + json['artwork']
+        : null;
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     addedBy = json['addedBy'];

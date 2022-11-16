@@ -1,3 +1,5 @@
+import 'package:hive/hive.dart';
+
 import 'controller/sign_up_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:solution_ke/core/app_export.dart';
@@ -339,8 +341,7 @@ class SignUpScreen extends GetWidget<SignUpController> {
     );
   }
 
-  void _onRegisterUserSuccess() {
-    Get.find<PrefUtils>().setUserID(controller.userProfileResponse.data!.id!);
+  void _onRegisterUserSuccess() async {
     Get.toNamed(AppRoutes.loginScreen);
   }
 
